@@ -10,17 +10,17 @@ std::string LoginHandler::GetName()
 	return "login";
 }
 
-Transaction LoginHandler::Handle(const User &user)
+Transaction LoginHandler::Handle(std::shared_ptr<User> user)
 {
 	// TODO: Implement
 }
 
-bool LoginHandler::IsAllowed(const User &user)
+bool LoginHandler::IsAllowed(std::shared_ptr<User> user)
 {
 	// TODO: Implement
 }
 
-bool LoginHandler::IsAvailable(const User &user)
+bool LoginHandler::IsAvailable(std::shared_ptr<User> user)
 {
 	// TODO: Implement
 }
