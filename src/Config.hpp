@@ -1,0 +1,1 @@
+#define USERNAME_LENGTH 15
