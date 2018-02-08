@@ -12,15 +12,22 @@ std::string LoginHandler::GetName()
 
 Transaction LoginHandler::Handle(std::shared_ptr<User> user)
 {
-	// TODO: Implement
+	std::string input;
+	std::cin >> input;
+
+	
+
+	// TODO: check length
+	
 }
 
 bool LoginHandler::IsAllowed(std::shared_ptr<User> user)
 {
-	// TODO: Implement
+	return true;
 }
 
 bool LoginHandler::IsAvailable(std::shared_ptr<User> user)
 {
 	// TODO: Implement
+
 }

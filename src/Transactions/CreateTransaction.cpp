@@ -1,5 +1,6 @@
 #include "CreateTransaction.hpp"
 #include <sstream>
+#include <exception>
 
 // We only need CreateTransaction because that's the only one we're deserializing.
 std::string CreateTransaction::Serializer::Serialize(CreateTransaction data)
@@ -19,7 +20,7 @@ std::string CreateTransaction::Serializer::Serialize(CreateTransaction data)
 
 CreateTransaction CreateTransaction::Serializer::Deserialize(std::string serializedData)
 {
-	throw std::exception("Not implemented");
+	//throw std::exception("Not implemented");
 }
 
 CreateTransaction::CreateTransaction()
