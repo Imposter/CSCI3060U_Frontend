@@ -2,7 +2,6 @@
 
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
-#include <iostream>
 
 class LogoutHandler : public IHandler
 {

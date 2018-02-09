@@ -3,7 +3,6 @@
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
 #include "../ItemFile.hpp"
-#include <iostream>
 
 class AdvertiseHandler : public IHandler
 {

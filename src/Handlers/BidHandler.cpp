@@ -25,9 +25,11 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 bool BidHandler::IsAllowed(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }
 
 bool BidHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }

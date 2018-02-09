@@ -25,9 +25,11 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 bool DeleteHandler::IsAllowed(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }
 
 bool DeleteHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }

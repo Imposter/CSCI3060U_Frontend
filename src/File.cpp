@@ -1,4 +1,5 @@
 #include "File.hpp"
+#include <string>
 
 File::File(std::string name)
 	: name(name) {}
@@ -32,7 +33,7 @@ std::vector<std::string> File::ReadLines()
 	while (!file.eof())
 	{
 		std::string line;
-		file >> line;
+		getline(file, line);
 		result.push_back(line);
 	}
 

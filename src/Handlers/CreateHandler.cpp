@@ -23,9 +23,11 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 bool CreateHandler::IsAllowed(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }
 
 bool CreateHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }

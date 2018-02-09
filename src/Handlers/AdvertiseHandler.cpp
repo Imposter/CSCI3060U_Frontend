@@ -23,9 +23,11 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 bool AdvertiseHandler::IsAllowed(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }
 
 bool AdvertiseHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement
+	return false;
 }

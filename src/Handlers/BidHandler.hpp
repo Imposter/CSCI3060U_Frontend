@@ -4,7 +4,6 @@
 #include "../TransactionFile.hpp"
 #include "../UserFile.hpp"
 #include "../ItemFile.hpp"
-#include <iostream>
 
 class BidHandler : public IHandler
 {

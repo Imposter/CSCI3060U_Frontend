@@ -1,4 +1,5 @@
 #include "LoginHandler.hpp"
+#include <iostream>
 
 LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
 	: transactionFile(transactionFile), userFile(userFile) {}

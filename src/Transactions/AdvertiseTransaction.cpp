@@ -3,11 +3,13 @@
 std::string AdvertiseTransaction::Serializer::Serialize(std::shared_ptr<AdvertiseTransaction> data)
 {
 	// TODO: Implement
+	return {};
 }
 
 std::shared_ptr<AdvertiseTransaction> AdvertiseTransaction::Serializer::Deserialize(std::string serializedData)
 {
 	// TODO: Implement
+	return NULL;
 }
 
 AdvertiseTransaction::AdvertiseTransaction()

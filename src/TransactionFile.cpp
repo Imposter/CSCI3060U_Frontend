@@ -25,13 +25,11 @@ std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(Trans
 	auto lines = ReadLines();
 	for (auto line : lines)
 	{
-		const std::string typeString = line.substr(2);
-		const std::string data = line.substr(3);
+		auto typeString = line.substr(2);
+		auto data = line.substr(3);
 
 		if (typeString == GetTransactionTypeString(type))
-		{
 			result.push_back(serializer->Deserialize(data));
-		}
 	}
 
 	return result;

@@ -5,23 +5,38 @@
 #include <vector>
 #include <memory>
 
+/**
+ * \brief Program entrypoint implementing program logic and components
+ * \param argc Argument count
+ * \param argv Startup arguments provided
+ * \return Exit code
+ */
 int main(int argc, char **argv)
 {
 	std::shared_ptr<User> user;
+
+	// TODO: Take working directory from command line arguments, if none supplied then use current working directory ("./")
 
 	// TODO: Load transaction, user account file, and available items file
 	// ...
 	
     std::vector<std::shared_ptr<IHandler>> handlers = {
 		// TODO: We need to pass necessary files to handlers
-		//std::make_shared<LoginHandler>() 
+		//std::make_shared<LoginHandler>(transactionFile, userFile) 
 	};
 
+	// Read input indefinitely
     std::string input;
 	while (true) 
 	{
         std::cout << "Enter a command: " << std::endl;
-        std::getline(std::cin, input);
+        getline(std::cin, input);
+
+		if (input == "exit")
+		{
+			// TODO: Save files
+			break;
+		}
 
 		for (auto handler : handlers) 
 		{

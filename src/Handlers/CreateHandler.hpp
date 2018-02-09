@@ -3,7 +3,6 @@
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
 #include "../UserFile.hpp"
-#include <iostream>
 
 class CreateHandler : public IHandler
 {

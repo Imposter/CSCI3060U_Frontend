@@ -3,11 +3,13 @@
 std::string RefundTransaction::Serializer::Serialize(std::shared_ptr<RefundTransaction> data)
 {
 	// TODO: Implement
+	return {};
 }
 
 std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(std::string serializedData)
 {
 	// TODO: Implement
+	return NULL;
 }
 
 RefundTransaction::RefundTransaction()
