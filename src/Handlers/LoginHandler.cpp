@@ -1,5 +1,8 @@
 #include "LoginHandler.hpp"
 
+LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
+	: transactionFile(transactionFile), userFile(userFile) {}
+
 TransactionType LoginHandler::GetType()
 {
 	return kTransactionType_Login;
@@ -15,13 +18,14 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	std::string input;
 	std::cout << "Enter your username: ";
 	std::cin >> input;
-
-	return NULL;
+	
 	// TODO: Check if account exists, etc.
 	// TODO: Check length
 
 	// On successful login, set user to std::make_shared<User>(constructor args here)
 	// and return successful transaction
+
+	return NULL;
 }
 
 bool LoginHandler::IsAllowed(std::shared_ptr<User> &user)

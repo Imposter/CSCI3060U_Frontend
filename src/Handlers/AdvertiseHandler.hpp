@@ -2,16 +2,16 @@
 
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
-#include "../UserFile.hpp"
+#include "../ItemFile.hpp"
 #include <iostream>
 
-class LoginHandler : public IHandler
+class AdvertiseHandler : public IHandler
 {
 	TransactionFile &transactionFile;
-	UserFile &userFile;
+	ItemFile &itemFile;
 
 public:
-	LoginHandler(TransactionFile &transactionFile, UserFile &userFile);
+	AdvertiseHandler(TransactionFile &transactionFile, ItemFile &itemFile);
 
 	TransactionType GetType() override;
 	std::string GetName() override;

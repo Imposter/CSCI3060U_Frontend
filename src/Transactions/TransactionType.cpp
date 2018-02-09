@@ -1,12 +1,7 @@
 #include "TransactionType.hpp"
-#include <sstream>
-#include <iomanip>
+#include "../Utility/String.hpp"
 
-// Add tostring function in string class
 std::string GetTransactionTypeString(TransactionType type)
 {
-	std::stringstream stream;
-	stream << std::setfill('0') << std::setw(2) << type;
-
-	return stream.str();
+	return String::PadLeft(std::to_string((int)type), '0', 2);
 }

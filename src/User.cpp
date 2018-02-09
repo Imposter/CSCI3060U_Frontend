@@ -1,11 +1,16 @@
 #include "User.hpp"
 
-User::User(std::string userName, UserType userType, int credits)
-	: userName(userName), userType(userType), credits(credits) {}
+User::User(std::string name, UserType type, int credits)
+	: name(name), type(type), credits(credits) {}
 
-const UserType &User::GetUserType() const
+const std::string &User::GetName() const
 {
-	return userType;
+	return name;
+}
+
+const UserType &User::GetType() const
+{
+	return type;
 }
 
 const int &User::GetCredits() const

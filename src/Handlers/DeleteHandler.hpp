@@ -5,13 +5,13 @@
 #include "../UserFile.hpp"
 #include <iostream>
 
-class LoginHandler : public IHandler
+class DeleteHandler : public IHandler
 {
 	TransactionFile &transactionFile;
 	UserFile &userFile;
 
 public:
-	LoginHandler(TransactionFile &transactionFile, UserFile &userFile);
+	DeleteHandler(TransactionFile &transactionFile, UserFile &userFile);
 
 	TransactionType GetType() override;
 	std::string GetName() override;

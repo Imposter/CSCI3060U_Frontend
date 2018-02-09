@@ -9,11 +9,12 @@ int main(int argc, char **argv)
 {
 	std::shared_ptr<User> user;
 
-	// TODO: Load transaction, user account files
+	// TODO: Load transaction, user account file, and available items file
 	// ...
 	
-    std::vector<std::shared_ptr<IHandler>> handlers = { 
-		std::make_shared<LoginHandler>() 
+    std::vector<std::shared_ptr<IHandler>> handlers = {
+		// TODO: We need to pass necessary files to handlers
+		//std::make_shared<LoginHandler>() 
 	};
 
     std::string input;

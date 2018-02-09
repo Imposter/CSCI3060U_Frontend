@@ -5,15 +5,15 @@
 
 class User
 {
-    std::string userName;
-    UserType userType;
+    std::string name;
+    UserType type;
     int credits;
-	// TODO: Add state (logged in, etc.)
 
 public:
-    User(std::string userName, UserType userType, int credits);
+    User(std::string name, UserType type, int credits);
 
-    const UserType &GetUserType() const;
+    const std::string &GetName() const;
+    const UserType &GetType() const;
     const int &GetCredits() const;
     void SetCredits(int credits);
 };
