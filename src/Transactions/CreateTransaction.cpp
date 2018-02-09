@@ -1,26 +1,13 @@
 #include "CreateTransaction.hpp"
-#include <sstream>
-#include <exception>
 
-// We only need CreateTransaction because that's the only one we're deserializing.
-std::string CreateTransaction::Serializer::Serialize(CreateTransaction data)
+std::string CreateTransaction::Serializer::Serialize(std::shared_ptr<CreateTransaction> data)
 {
-	// Something along the lines of
-	/*
-	std::stringstream stream;
-	stream << GetTransactionTypeString(data.GetType());
-	stream << " ";
-	stream << data.userName;
-	stream << " ";
-	stream << GetUserTypeString(data.userType);
-	stream << " ";
-	// ...
-	*/
+	// TODO: Implement
 }
 
-CreateTransaction CreateTransaction::Serializer::Deserialize(std::string serializedData)
+std::shared_ptr<CreateTransaction> CreateTransaction::Serializer::Deserialize(std::string serializedData)
 {
-	//throw std::exception("Not implemented");
+	// TODO: Implement
 }
 
 CreateTransaction::CreateTransaction()

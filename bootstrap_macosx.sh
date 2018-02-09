@@ -1,2 +1,1 @@
-
-./premake5_macosx --file=../premake5.lua gmake
+./bin/premake5_macosx --file=premake5.lua gmake

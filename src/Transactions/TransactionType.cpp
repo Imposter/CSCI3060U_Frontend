@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iomanip>
 
+// Add tostring function in string class
 std::string GetTransactionTypeString(TransactionType type)
 {
 	std::stringstream stream;

@@ -10,7 +10,7 @@ class File
 	std::fstream file;
 
 public:
-	explicit File(const std::string &name);
+	explicit File(std::string name);
 	~File();
 
 	bool Open();
@@ -20,4 +20,5 @@ public:
 	void WriteLine(std::string line);
 
 	void Rewind();
+	void Forward();
 };

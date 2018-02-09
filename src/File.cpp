@@ -1,6 +1,6 @@
 #include "File.hpp"
 
-File::File(const std::string &name)
+File::File(std::string name)
 	: name(name) {}
 
 File::~File()
@@ -48,4 +48,10 @@ void File::Rewind()
 {
 	if (file.is_open())
 		file.seekg(std::ios::beg);
+}
+
+void File::Forward()
+{
+	if (file.is_open())
+		file.seekg(std::ios::end);
 }

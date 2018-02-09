@@ -15,8 +15,8 @@ public:
 	class Serializer : public ISerializer<CreateTransaction>
 	{
 	public:
-		std::string Serialize(CreateTransaction data) override;
-		CreateTransaction Deserialize(std::string serializedData) override;
+		std::string Serialize(std::shared_ptr<CreateTransaction> data) override;
+		std::shared_ptr<CreateTransaction> Deserialize(std::string serializedData) override;
 	};
 
 	explicit CreateTransaction();

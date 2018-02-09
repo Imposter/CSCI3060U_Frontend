@@ -6,7 +6,7 @@ project 'frontend'
 	kind 'ConsoleApp'
 	language 'C++'
 	cppdialect "C++14"
-	toolset 'clang'
+	toolset 'clang' -- NOTE: This will not work with Visual Studio
 	targetdir 'build/%{cfg.buildCfg}'
 	
 	files {
