@@ -50,3 +50,5 @@ void TransactionFile::WriteTransaction(std::shared_ptr<Transaction> transaction)
 	// Serialize and write transaction string
 	WriteLine(serializer->Serialize(transaction));
 }
+
+// TODO/NOTE: OnClose write EOF

@@ -16,23 +16,23 @@ class BasicTransaction : public Transaction
 
 public:
 	/**
-	* \brief Serializer for serializing and deserializing AdvertiseTransaction
-	*/
+	 * \brief Serializer for serializing and deserializing AdvertiseTransaction
+	 */
 	class Serializer : public ISerializer<BasicTransaction>
 	{
 	public:
 		/**
-		* \brief Serializes transaction into a string
-		* \param data Transaction to serialize
-		* \return String representation of transaction
-		*/
+		 * \brief Serializes transaction into a string
+		 * \param data Transaction to serialize
+		 * \return String representation of transaction
+		 */
 		std::string Serialize(std::shared_ptr<BasicTransaction> data) override;
 
 		/**
-		* \brief Deserializes string into transaction
-		* \param serializedData Data to deserialize into a transaction
-		* \return Transaction from data
-		*/
+		 * \brief Deserializes string into transaction
+		 * \param serializedData Data to deserialize into a transaction
+		 * \return Transaction from data
+		 */
 		std::shared_ptr<BasicTransaction> Deserialize(std::string serializedData) override;
 	};
 
