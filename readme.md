@@ -29,5 +29,5 @@
     * release_win32
 
 ## Authors
-Eyaz Rehman ([http://github.com/Imposter](GitHub))
-Spencer Bryson ([http://github.com/SpencerCBryson](GitHub))
+- Eyaz Rehman ([http://github.com/Imposter](GitHub))
+- Spencer Bryson ([http://github.com/SpencerCBryson](GitHub))
