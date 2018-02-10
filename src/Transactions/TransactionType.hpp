@@ -15,5 +15,9 @@ enum TransactionType
 	kTransactionType_AddCredit = 06
 };
 
-// NOTE: Untested
+/**
+ * \brief Converts transaction type to a string
+ * \param type Transaction type to convert to string
+ * \return Transaction type in its string representation
+ */
 std::string GetTransactionTypeString(TransactionType type);
