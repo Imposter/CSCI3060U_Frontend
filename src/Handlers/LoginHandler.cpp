@@ -1,8 +1,10 @@
 #include "LoginHandler.hpp"
+#include "../Config.hpp"
+#include "../Transactions/LoginTransaction.hpp"
 #include <iostream>
 
-LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
-	: transactionFile(transactionFile), userFile(userFile) {}
+LoginHandler::LoginHandler(UserFile &userFile)
+	: userFile(userFile) {}
 
 TransactionType LoginHandler::GetType()
 {
@@ -16,17 +18,44 @@ std::string LoginHandler::GetName()
 
 std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 {
-	std::string input;
+	// Check if already logged in
+	if (user)
+	{
+		std::cerr << "ERROR: Already logged in" << std::endl;
+		return NULL;
+	}
+
+	// Get username
+	std::string username;
 	std::cout << "Enter your username: ";
-	std::cin >> input;
-	
-	// TODO: Check if account exists, etc.
-	// TODO: Check length
+	getline(std::cin, username);
 
-	// On successful login, set user to std::make_shared<User>(constructor args here)
-	// and return successful transaction
+	// Check username length
+	if (username.size() > USERNAME_LENGTH)
+	{
+		std::cerr << "ERROR: Invalid username (too long)" << std::endl;
+		return NULL;
+	}
 
-	return NULL;
+	// Check if account exists
+	auto userAccount = userFile.GetUserByName(username);
+	if (!userAccount)
+	{
+		std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+		return NULL;
+	}
+
+	// Welcome user differently if they are privileged
+	if (userAccount->GetType() == kUserType_Admin)
+		std::cout << "Privileged login accepted" << std::endl;
+	else
+		std::cout << "Login accepted" << std::endl;
+
+	// Set user logged in
+	user = userAccount;
+
+	// Return a successful transaction
+	return std::make_shared<LoginTransaction>(user->GetName().c_str(), user->GetType(), user->GetCredits());
 }
 
 bool LoginHandler::IsAllowed(std::shared_ptr<User> &user)

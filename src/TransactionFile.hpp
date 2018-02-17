@@ -3,6 +3,7 @@
 #include "File.hpp"
 #include "Transactions/Transaction.hpp"
 #include "Utility/ISerializer.hpp"
+#include "Utility/PointerCast.hpp"
 #include <map>
 #include <memory>
 
@@ -25,14 +26,11 @@ public:
 	 * \param type Transaction to which the serializer is used for 
 	 * \param serializer Serializer used to serialize or deserialize transaction
 	 */
-	void AddSerializer(TransactionType type, std::shared_ptr<ISerializer<Transaction>> serializer);
-
-	/**
-	 * \brief Returns all of the transactions made of a certain type
-	 * \param type Transaction type to get transaction for
-	 * \return All transactions of the specified type
-	 */
-	std::vector<std::shared_ptr<Transaction>> GetTransactions(TransactionType type);
+	template<typename TTransaction = Transaction>
+	void AddSerializer(TransactionType type, std::shared_ptr<ISerializer<TTransaction>> serializer)
+	{
+		serializers.insert({ type, PointerCast::Reinterpret<ISerializer<Transaction>>(serializer) });
+	}
 
 	/**
 	 * \brief Serializes and writes specified transaction to the file

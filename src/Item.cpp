@@ -1,6 +1,6 @@
 #include "Item.hpp"
 
-Item::Item(std::string name, std::string seller, std::string bidder, int daysToAuction, double currentBid)
+Item::Item(std::string name, std::string seller, std::string bidder, int daysToAuction, int currentBid)
     : name(name), sellerUserName(seller), bidderUserName(bidder), daysToAuction(daysToAuction), currentBid(currentBid) {}
 
 const std::string &Item::GetName() const
@@ -33,7 +33,7 @@ void Item::SetBidderName(std::string bidder)
     bidderUserName = bidder;
 }
 
-void Item::SetBid(double bid)
+void Item::SetBid(int bid)
 {
     currentBid = bid;
 }

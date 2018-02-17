@@ -1,6 +1,6 @@
 #include "User.hpp"
 
-User::User(std::string name, UserType type, double credits)
+User::User(std::string name, UserType type, float credits)
 	: name(name), type(type), credits(credits) {}
 
 const std::string &User::GetName() const
@@ -13,12 +13,12 @@ const UserType &User::GetType() const
 	return type;
 }
 
-const double &User::GetCredits() const
+const float &User::GetCredits() const
 {
 	return credits;
 }
 
-void User::SetCredits(int credits)
+void User::SetCredits(float credits)
 {
 	this->credits = credits;
 }

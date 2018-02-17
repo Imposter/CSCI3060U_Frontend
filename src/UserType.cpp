@@ -16,3 +16,17 @@ std::string GetUserTypeString(UserType type)
 
 	return "";
 }
+
+UserType GetUserTypeFromString(std::string &type)
+{
+	if (type == "BS")
+		return kUserType_Buy;
+	if (type == "SS")
+		return kUserType_Sell;
+	if (type == "FS")
+		return kUserType_Full;
+	if (type == "AA")
+		return kUserType_Admin;
+
+	return kUserType_Buy;
+}

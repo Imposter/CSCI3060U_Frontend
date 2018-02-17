@@ -13,7 +13,7 @@ class BidTransaction : public Transaction
     char itemName[ITEM_NAME_LENGTH];
     char sellerUserName[USERNAME_LENGTH];
     char buyerUserName[USERNAME_LENGTH];
-    int newBid;
+	float newBid;
 
 public:
 	/**
@@ -40,5 +40,5 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with bid type
 	 */
-	explicit BidTransaction();
+	explicit BidTransaction(const char *itemName, const char *sellerUserName, const char *buyerUserName, float newBid);
 };

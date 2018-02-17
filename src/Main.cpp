@@ -1,3 +1,12 @@
+#include "TransactionFile.hpp"
+#include "UserFile.hpp"
+#include "ItemFile.hpp"
+
+#include "Transactions/BasicTransaction.hpp"
+#include "Transactions/AdvertiseTransaction.hpp"
+#include "Transactions/BidTransaction.hpp"
+#include "Transactions/RefundTransaction.hpp"
+
 #include "Handlers/IHandler.hpp"
 #include "Handlers/LoginHandler.hpp"
 
@@ -13,46 +22,125 @@
  */
 int main(int argc, char **argv)
 {
-	std::shared_ptr<User> user;
+	// Get files
+	std::string userFilePath = "data/users.txt";
+	std::string itemFilePath = "data/available_items.txt";
+	std::string transactionFilePath = "data/transactions.txt";
 
-	// TODO: Take working directory from command line arguments, if none supplied then use current working directory ("./")
+	// Override default files with ones provided
+	if (argc >= 4)
+	{
+		userFilePath = argv[1];
+		itemFilePath = argv[2];
+		transactionFilePath = argv[3];
+	}
 
-	// TODO: Load transaction, user account file, and available items file
-	// ...
-	
-    std::vector<std::shared_ptr<IHandler>> handlers = {
-		// TODO: We need to pass necessary files to handlers
-		//std::make_shared<LoginHandler>(transactionFile, userFile) 
+	// Load files
+	UserFile userFile(userFilePath);
+	ItemFile itemFile(itemFilePath);
+	TransactionFile transactionFile(transactionFilePath);
+
+	if (!userFile.Open())
+	{
+		std::cerr << "Unable to open user file!" << std::endl;
+		return EXIT_FAILURE;
+	}
+
+	if (!itemFile.Open())
+	{
+		std::cerr << "Unable to open available items file!" << std::endl;
+		return EXIT_FAILURE;
+	}
+
+	// Open in append mode
+	if (!transactionFile.Open(true))
+	{
+		std::cerr << "Unable to open transactions file!" << std::endl;
+		return EXIT_FAILURE;
+	}
+
+	// Create serializers
+	transactionFile.AddSerializer<BasicTransaction>(kTransactionType_Login, std::make_shared<BasicTransaction::Serializer>());
+	transactionFile.AddSerializer<BasicTransaction>(kTransactionType_Logout, std::make_shared<BasicTransaction::Serializer>());
+	transactionFile.AddSerializer<BasicTransaction>(kTransactionType_Create, std::make_shared<BasicTransaction::Serializer>());
+	transactionFile.AddSerializer<BasicTransaction>(kTransactionType_Delete, std::make_shared<BasicTransaction::Serializer>());
+	transactionFile.AddSerializer<AdvertiseTransaction>(kTransactionType_Advertise, std::make_shared<AdvertiseTransaction::Serializer>());
+	transactionFile.AddSerializer<BidTransaction>(kTransactionType_Bid, std::make_shared<BidTransaction::Serializer>());
+	transactionFile.AddSerializer<RefundTransaction>(kTransactionType_Refund, std::make_shared<RefundTransaction::Serializer>());
+	transactionFile.AddSerializer<BasicTransaction>(kTransactionType_AddCredit, std::make_shared<BasicTransaction::Serializer>());
+
+	// Create handlers
+	std::vector<std::shared_ptr<IHandler>> handlers = {
+		std::make_shared<LoginHandler>(userFile)
 	};
+
+	// Pointer for current user
+	std::shared_ptr<User> user;
 
 	// Read input indefinitely
     std::string input;
 	while (true) 
 	{
-        std::cout << "Enter a command: " << std::endl;
+        std::cout << "Auction> ";
         getline(std::cin, input);
 
+		if (input == "?")
+		{
+			// Output all the available commands
+			std::cout << "Available commands:" << std::endl;
+			for (auto handler : handlers)
+				if (handler->IsAvailable(user) && handler->IsAllowed(user))
+					std::cout << "> " << handler->GetName() << std::endl;
+
+			// We've handled the command, so wait for another one
+			continue;
+		}
 		if (input == "exit")
 		{
-			// TODO: Save files
+			// Save and close files
+			transactionFile.Close();
+			itemFile.Close();
+			userFile.Close();
+
 			break;
 		}
 
+		bool commandFound = false;
 		for (auto handler : handlers) 
 		{
 			if (input == handler->GetName())
 			{
-				// TODO: Check if command is allowed
+				// Set as handled
+				commandFound = true;
 
-				// TODO: Check if command is available
+				// Check if command is allowed
+				if (!handler->IsAllowed(user))
+				{
+					std::cerr << "ERROR: Access denied" << std::endl;
+					break;
+				}
 
+				// Check if command is available
+				if (!handler->IsAvailable(user))
+				{
+					std::cerr << "ERROR: Not available" << std::endl;
+					break;
+				}
+
+				// Handle request
 				auto transaction = handler->Handle(user);
 
-				// TODO: Check if a transaction was returned
-				
-				// TODO: Use transaction (write to file)
+				// Check if a transaction was returned
+				if (transaction)
+				{
+					// Write transaction to daily transactions file
+					transactionFile.WriteTransaction(transaction);
+				}
 			}
         }
+
+		if (!commandFound)
+			std::cerr << "Unknown command" << std::endl;
     }
 
     return 0;

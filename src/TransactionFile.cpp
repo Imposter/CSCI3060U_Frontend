@@ -1,39 +1,7 @@
 #include "TransactionFile.hpp"
-#include "Utility/PointerCast.hpp"
 
 TransactionFile::TransactionFile(std::string fileName)
 	: File(fileName) {}
-
-void TransactionFile::AddSerializer(TransactionType type, std::shared_ptr<ISerializer<Transaction>> serializer)
-{
-	serializers.insert({ type, PointerCast::Reinterpret<ISerializer<Transaction>>(serializer) });
-}
-
-std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(TransactionType type)
-{
-	// Get serializer for type
-	std::vector<std::shared_ptr<Transaction>> result;
-	if (serializers.find(type) == serializers.end())
-		return result;
-
-	auto serializer = serializers[type];
-
-	// Rewind file
-	Rewind();
-
-	// Read and return result
-	auto lines = ReadLines();
-	for (auto line : lines)
-	{
-		auto typeString = line.substr(2);
-		auto data = line.substr(3);
-
-		if (typeString == GetTransactionTypeString(type))
-			result.push_back(serializer->Deserialize(data));
-	}
-
-	return result;
-}
 
 void TransactionFile::WriteTransaction(std::shared_ptr<Transaction> transaction)
 {
@@ -50,5 +18,3 @@ void TransactionFile::WriteTransaction(std::shared_ptr<Transaction> transaction)
 	// Serialize and write transaction string
 	WriteLine(serializer->Serialize(transaction));
 }
-
-// TODO/NOTE: OnClose write EOF

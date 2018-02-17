@@ -13,7 +13,7 @@ class AdvertiseTransaction : public Transaction
     char itemName[ITEM_NAME_LENGTH];
 	char sellerUserName[USERNAME_LENGTH];
 	int daysToAuction;
-    int minBid;
+	float minBid;
 
 public:
 	/**
@@ -40,5 +40,5 @@ public:
 	/**
 	* \brief Default constructor initializing transaction with advertise type
 	*/
-	explicit AdvertiseTransaction();
+	explicit AdvertiseTransaction(const char *itemName, const char *sellerUserName, int daysToAuction, float minBid);
 };

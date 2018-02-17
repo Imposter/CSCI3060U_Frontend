@@ -9,9 +9,12 @@ File::~File()
 	Close();
 }
 
-bool File::Open()
+bool File::Open(bool append)
 {
-	file.open(name, std::ios::in | std::ios::out);
+	auto openMode = std::fstream::in | std::fstream::out;
+	if (append) openMode |= std::fstream::app;
+
+	file.open(name, openMode);
 	return file.is_open();
 }
 

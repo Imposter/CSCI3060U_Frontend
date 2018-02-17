@@ -1,4 +1,4 @@
 #include "LogoutTransaction.hpp"
 
-LogoutTransaction::LogoutTransaction()
-    : BasicTransaction(kTransactionType_Logout) {}
+LogoutTransaction::LogoutTransaction(const char *userName, UserType userType, float credits)
+    : BasicTransaction(kTransactionType_Logout, userName, userType, credits) {}

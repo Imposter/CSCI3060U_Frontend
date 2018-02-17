@@ -9,16 +9,14 @@
  */
 class LoginHandler : public IHandler
 {
-	TransactionFile &transactionFile;
 	UserFile &userFile;
 
 public:
 	/**
-	 * \brief Initializes login handler with transactions and user accounts file
-	 * \param transactionFile Daily transactions file
+	 * \brief Initializes login handler with user accounts file
 	 * \param userFile User accounts file
 	 */
-	explicit LoginHandler(TransactionFile &transactionFile, UserFile &userFile);
+	explicit LoginHandler(UserFile &userFile);
 
 	/**
 	 * \brief Returns login transaction type

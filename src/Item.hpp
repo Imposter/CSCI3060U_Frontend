@@ -11,7 +11,7 @@ class Item
     std::string sellerUserName;
     std::string bidderUserName;
     int daysToAuction;
-    double currentBid;
+    int currentBid;
 
 public:
 	/**
@@ -22,7 +22,7 @@ public:
      * \param daysToAuction Days left to auction
      * \param currentBid Current bid
      */
-    Item(std::string name, std::string seller, std::string bidder, int daysToAuction, double currentBid);
+    Item(std::string name, std::string seller, std::string bidder, int daysToAuction, int currentBid);
     
 	/**
      * \brief Returns item's name
@@ -64,5 +64,5 @@ public:
      * \brief Sets the currently highest bidder's bid
      * \param bid Highest bid
      */
-    void SetBid(double bid);
+    void SetBid(int bid);
 };

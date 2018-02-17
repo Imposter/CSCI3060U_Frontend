@@ -1,4 +1,5 @@
 #include "AdvertiseTransaction.hpp"
+#include <algorithm>
 
 std::string AdvertiseTransaction::Serializer::Serialize(std::shared_ptr<AdvertiseTransaction> data)
 {
@@ -12,5 +13,14 @@ std::shared_ptr<AdvertiseTransaction> AdvertiseTransaction::Serializer::Deserial
 	return NULL;
 }
 
-AdvertiseTransaction::AdvertiseTransaction()
-	: Transaction(kTransactionType_Advertise), itemName{0}, sellerUserName{0}, daysToAuction(0), minBid(0) {}
+AdvertiseTransaction::AdvertiseTransaction(const char *itemName, const char *sellerUserName, int daysToAuction, float minBid)
+	: Transaction(kTransactionType_Advertise), daysToAuction(daysToAuction), minBid(minBid) 
+{
+	// Copy item name
+	int len = strlen(itemName);
+	strncpy_s(this->itemName, itemName, std::min(len, ITEM_NAME_LENGTH));
+
+	// Copy user name
+	len = strlen(sellerUserName);
+	strncpy_s(this->sellerUserName, sellerUserName, std::min(len, USERNAME_LENGTH));
+}

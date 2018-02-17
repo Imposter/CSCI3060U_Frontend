@@ -35,3 +35,10 @@ enum UserType
  * \return User type in string representation
  */
 std::string GetUserTypeString(UserType type);
+
+/**
+ * \brief Converts a specified user type string to its integer representation
+ * \param type 
+ * \return 
+ */
+UserType GetUserTypeFromString(std::string &type);

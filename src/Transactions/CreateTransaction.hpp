@@ -11,5 +11,5 @@ public:
 	/**
 	 * \brief Initializes transaction with create type
 	 */
-	explicit CreateTransaction();
+	explicit CreateTransaction(const char *userName, UserType userType, float credits);
 };

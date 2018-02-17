@@ -12,7 +12,7 @@ class BasicTransaction : public Transaction
 {
     char userName[USERNAME_LENGTH];
     UserType userType;
-    int credits;
+	float credits;
 
 public:
 	/**
@@ -40,5 +40,5 @@ public:
 	 * \brief Initializes transaction with transaction type
 	 * \param type Transaction type
 	 */
-	explicit BasicTransaction(TransactionType type);
+	explicit BasicTransaction(TransactionType type, const char *userName, UserType userType, float credits);
 };

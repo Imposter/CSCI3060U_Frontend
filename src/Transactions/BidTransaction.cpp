@@ -1,4 +1,5 @@
 #include "BidTransaction.hpp"
+#include <algorithm>
 
 std::string BidTransaction::Serializer::Serialize(std::shared_ptr<BidTransaction> data)
 {
@@ -12,5 +13,18 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 	return NULL;
 }
 
-BidTransaction::BidTransaction()
-	: Transaction(kTransactionType_Bid), itemName{0}, sellerUserName{0}, buyerUserName{0}, newBid(0) {}
+BidTransaction::BidTransaction(const char *itemName, const char *sellerUserName, const char *buyerUserName, float newBid)
+	: Transaction(kTransactionType_Bid), newBid(newBid)
+{
+	// Copy item name
+	int len = strlen(itemName);
+	strncpy_s(this->itemName, itemName, std::min(len, ITEM_NAME_LENGTH));
+
+	// Copy seller user name
+	len = strlen(sellerUserName);
+	strncpy_s(this->sellerUserName, sellerUserName, std::min(len, USERNAME_LENGTH));
+
+	// Copy buyer user name
+	len = strlen(buyerUserName);
+	strncpy_s(this->buyerUserName, buyerUserName, std::min(len, USERNAME_LENGTH));
+}

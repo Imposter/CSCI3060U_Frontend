@@ -1,4 +1,5 @@
 #include "RefundTransaction.hpp"
+#include <algorithm>
 
 std::string RefundTransaction::Serializer::Serialize(std::shared_ptr<RefundTransaction> data)
 {
@@ -12,5 +13,14 @@ std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(st
 	return NULL;
 }
 
-RefundTransaction::RefundTransaction()
-	: Transaction(kTransactionType_Refund), buyerUserName{0}, sellerUserName{0}, credits(0) {}
+RefundTransaction::RefundTransaction(const char *buyerUserName, const char *sellerUserName, float credits)
+	: Transaction(kTransactionType_Refund), credits(credits)
+{
+	// Copy buyer user name
+	int len = strlen(buyerUserName);
+	strncpy_s(this->buyerUserName, buyerUserName, std::min(len, USERNAME_LENGTH));
+
+	// Copy seller user name
+	len = strlen(sellerUserName);
+	strncpy_s(this->sellerUserName, sellerUserName, std::min(len, USERNAME_LENGTH));
+}

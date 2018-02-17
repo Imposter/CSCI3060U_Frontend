@@ -8,6 +8,7 @@
  */
 class File
 {
+protected:
 	std::string name;
 	std::fstream file;
 
@@ -25,9 +26,10 @@ public:
 
 	/**
 	 * \brief Opens a handle to the file
+	 * \param append Open file in append mode
 	 * \return Whether the file was successfully opened or not
 	 */
-	bool Open();
+	bool Open(bool append = false);
 
 	/**
 	 * \brief Closes file handle

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <stdarg.h>
 
 /**
  * \brief String utility for STL string manipulation
@@ -25,4 +26,14 @@ public:
 	 * \return Copy of the target string with padding added to the right
 	 */
 	static std::string PadRight(std::string target, char character, int count);
+
+
+
+	/**
+	 * \brief Formats a string using a C format and argument style
+	 * \param format C string format
+	 * \param ... Variable format arguments
+	 * \return Formatted string
+	 */
+	static std::string Format(std::string format, ...);
 };

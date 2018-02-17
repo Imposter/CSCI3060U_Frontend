@@ -12,7 +12,7 @@ class RefundTransaction : public Transaction
 {
     char buyerUserName[USERNAME_LENGTH];
     char sellerUserName[USERNAME_LENGTH];
-    int credits;
+	float credits;
 
 public:
 	/**
@@ -39,5 +39,5 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with refund type
 	 */
-	explicit RefundTransaction();
+	explicit RefundTransaction(const char *buyerUserName, const char *sellerUserName, float credits);
 };
