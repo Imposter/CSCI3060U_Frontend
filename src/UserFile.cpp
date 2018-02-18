@@ -17,7 +17,7 @@ bool UserFile::Open()
 		
 		std::string name;
 		std::string type;
-		float credits;
+		double credits;
 
 		stream >> name;
 		stream >> type;

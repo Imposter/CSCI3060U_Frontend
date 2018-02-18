@@ -10,7 +10,7 @@ class User
 {
     std::string name;
     UserType type;
-    float credits;
+    double credits;
 
 public:
 	/**
@@ -19,7 +19,7 @@ public:
      * \param type User account type
      * \param credits Amount of credits
      */
-    User(std::string name, UserType type, float credits);
+    User(std::string name, UserType type, double credits);
 
 	/**
      * \brief Returns user's name
@@ -37,11 +37,11 @@ public:
      * \brief Returns user's amount of credits
      * \return Amount of credits
      */
-    const float &GetCredits() const;
+    const double &GetCredits() const;
 
 	/**
      * \brief Sets the user's amount of credits
      * \param credits Amount of credits
      */
-    void SetCredits(float credits);
+    void SetCredits(double credits);
 };

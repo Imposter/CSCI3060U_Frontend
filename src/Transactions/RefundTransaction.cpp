@@ -21,7 +21,7 @@ std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(st
 
 	std::string buyerUserName;
 	std::string sellerUserName;
-	float credits;
+	double credits;
 
 	// Ignore type
 	stream.ignore();
@@ -33,7 +33,7 @@ std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(st
 	return std::make_shared<RefundTransaction>(buyerUserName, sellerUserName, credits);
 }
 
-RefundTransaction::RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, float credits)
+RefundTransaction::RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, double credits)
 	: Transaction(kTransactionType_Refund), buyerUserName(buyerUserName), sellerUserName(sellerUserName), credits(credits) {}
 
 const std::string &RefundTransaction::GetBuyerUserName() const
@@ -46,7 +46,7 @@ const std::string &RefundTransaction::GetSellerUserName() const
 	return sellerUserName;
 }
 
-const float &RefundTransaction::GetCredits() const
+const double &RefundTransaction::GetCredits() const
 {
 	return credits;
 }

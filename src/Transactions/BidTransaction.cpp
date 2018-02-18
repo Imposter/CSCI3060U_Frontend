@@ -23,7 +23,7 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 	std::string itemName;
 	std::string sellerUserName;
 	std::string buyerUserName;
-	float newBid;
+	double newBid;
 
 	// Ignore type
 	stream.ignore();
@@ -36,7 +36,7 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 	return std::make_shared<BidTransaction>(itemName, sellerUserName, sellerUserName, newBid);
 }
 
-BidTransaction::BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, float newBid)
+BidTransaction::BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, double newBid)
 	: Transaction(kTransactionType_Bid), itemName(itemName), sellerUserName(sellerUserName), buyerUserName(buyerUserName), newBid(newBid) {}
 
 const std::string &BidTransaction::GetItemName() const
@@ -54,7 +54,7 @@ const std::string &BidTransaction::GetBuyerUserName() const
 	return buyerUserName;
 }
 
-const float &BidTransaction::GetNewBid() const
+const double &BidTransaction::GetNewBid() const
 {
 	return newBid;
 }

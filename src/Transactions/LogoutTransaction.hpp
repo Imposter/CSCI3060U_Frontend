@@ -11,5 +11,5 @@ public:
 	/**
 	 * \brief Initializes transaction with logout type
 	 */
-	explicit LogoutTransaction(const std::string &userName, UserType userType, float credits);
+	explicit LogoutTransaction(const std::string &userName, UserType userType, double credits);
 };

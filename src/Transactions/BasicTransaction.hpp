@@ -11,7 +11,7 @@ class BasicTransaction : public Transaction
 {
     std::string userName;
     UserType userType;
-	float credits;
+	double credits;
 
 public:
 	/**
@@ -39,7 +39,7 @@ public:
 	 * \brief Initializes transaction with transaction type
 	 * \param type Transaction type
 	 */
-	explicit BasicTransaction(TransactionType type, const std::string &userName, UserType userType, float credits);
+	explicit BasicTransaction(TransactionType type, const std::string &userName, UserType userType, double credits);
 
 	/**
 	 * \brief Gets user name
@@ -57,5 +57,5 @@ public:
 	 * \brief Gets user's credits
 	 * \return Account credits
 	 */
-	const float &GetCredits() const;
+	const double &GetCredits() const;
 };

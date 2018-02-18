@@ -12,7 +12,7 @@ class AdvertiseTransaction : public Transaction
 	std::string itemName;
 	std::string sellerUserName;
 	int daysToAuction;
-	float minBid;
+	double minBid;
 
 public:
 	/**
@@ -39,7 +39,7 @@ public:
 	/**
 	* \brief Default constructor initializing transaction with advertise type
 	*/
-	explicit AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, float minBid);
+	explicit AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, double minBid);
 
 	/**
 	* \brief Gets item name
@@ -63,5 +63,5 @@ public:
 	* \brief Gets the item's minimum bid
 	* \return Minimum bid
 	*/
-	const float &GetMinimumBid() const;
+	const double &GetMinimumBid() const;
 };

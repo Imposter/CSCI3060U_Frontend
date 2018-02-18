@@ -13,7 +13,7 @@ class BidTransaction : public Transaction
     std::string itemName;
 	std::string sellerUserName;
 	std::string buyerUserName;
-	float newBid;
+	double newBid;
 
 public:
 	/**
@@ -40,7 +40,7 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with bid type
 	 */
-	explicit BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, float newBid);
+	explicit BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, double newBid);
 
 	/**
 	* \brief Gets item name
@@ -64,5 +64,5 @@ public:
 	* \brief Gets the item's new bid
 	* \return New bid
 	*/
-	const float &GetNewBid() const;
+	const double &GetNewBid() const;
 };

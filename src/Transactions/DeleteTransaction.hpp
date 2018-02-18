@@ -11,5 +11,5 @@ public:
 	/**
 	 * \brief Initializes transaction with delete type
 	 */
-	explicit DeleteTransaction(const std::string &userName, UserType userType, float credits);
+	explicit DeleteTransaction(const std::string &userName, UserType userType, double credits);
 };

@@ -22,7 +22,7 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 	int type;
 	std::string userName;
 	std::string userType;
-	float userCredits;
+	double userCredits;
 
 	stream >> type;
 	stream >> userName;
@@ -32,7 +32,7 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 	return std::make_shared<BasicTransaction>(static_cast<TransactionType>(type), userName, GetUserTypeFromString(userType), userCredits);
 }
 
-BasicTransaction::BasicTransaction(TransactionType type, const std::string &userName, UserType userType, float credits)
+BasicTransaction::BasicTransaction(TransactionType type, const std::string &userName, UserType userType, double credits)
 	: Transaction(type), userName(userName), userType(userType), credits(credits) {}
 
 const std::string &BasicTransaction::GetUserName() const
@@ -45,7 +45,7 @@ const UserType &BasicTransaction::GetUserType() const
 	return userType;
 }
 
-const float &BasicTransaction::GetCredits() const
+const double &BasicTransaction::GetCredits() const
 {
 	return credits;
 }

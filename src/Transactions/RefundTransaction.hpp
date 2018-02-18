@@ -11,7 +11,7 @@ class RefundTransaction : public Transaction
 {
 	std::string buyerUserName;
 	std::string sellerUserName;
-	float credits;
+	double credits;
 
 public:
 	/**
@@ -38,7 +38,7 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with refund type
 	 */
-	explicit RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, float credits);
+	explicit RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, double credits);
 
 	/**
 	* \brief Gets buyer's user name
@@ -56,5 +56,5 @@ public:
 	* \brief Gets the refunded credits
 	* \return Refunded credits
 	*/
-	const float &GetCredits() const;
+	const double &GetCredits() const;
 };

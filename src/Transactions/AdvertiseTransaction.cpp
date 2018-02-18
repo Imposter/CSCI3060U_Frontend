@@ -23,7 +23,7 @@ std::shared_ptr<AdvertiseTransaction> AdvertiseTransaction::Serializer::Deserial
 	std::string itemName;
 	std::string sellerUserName;
 	int daysToAuction;
-	float minBid;
+	double minBid;
 
 	// Ignore type
 	stream.ignore();
@@ -36,7 +36,7 @@ std::shared_ptr<AdvertiseTransaction> AdvertiseTransaction::Serializer::Deserial
 	return std::make_shared<AdvertiseTransaction>(itemName, sellerUserName, daysToAuction, minBid);
 }
 
-AdvertiseTransaction::AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, float minBid)
+AdvertiseTransaction::AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, double minBid)
 	: Transaction(kTransactionType_Advertise), itemName(itemName), sellerUserName(sellerUserName), daysToAuction(daysToAuction), minBid(minBid) {}
 
 const std::string &AdvertiseTransaction::GetItemName() const
@@ -54,7 +54,7 @@ const int &AdvertiseTransaction::GetDaysToAuction() const
 	return daysToAuction;
 }
 
-const float &AdvertiseTransaction::GetMinimumBid() const
+const double &AdvertiseTransaction::GetMinimumBid() const
 {
 	return minBid;
 }
