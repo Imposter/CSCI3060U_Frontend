@@ -10,7 +10,7 @@ std::string RefundTransaction::Serializer::Serialize(std::shared_ptr<RefundTrans
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
 	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
 	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', 6);
+	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }

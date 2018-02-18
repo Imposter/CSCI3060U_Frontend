@@ -8,3 +8,6 @@
 
 // Maximum amount of credits
 #define CREDITS_MAX 999999.99
+
+// Maximum amount of characters in a credit string
+#define CREDITS_LENGTH 9

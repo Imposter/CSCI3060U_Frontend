@@ -11,7 +11,7 @@ std::string BidTransaction::Serializer::Serialize(std::shared_ptr<BidTransaction
 	stream << String::PadRight(data->itemName, ' ', ITEM_NAME_LENGTH) << ' ';
 	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
 	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->newBid), '0', 6);
+	stream << String::PadLeft(String::Format("%.2f", data->newBid), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }

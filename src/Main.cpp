@@ -13,6 +13,7 @@
 #include "Handlers/CreateHandler.hpp"
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <memory>
 
@@ -35,6 +36,17 @@ int main(int argc, char **argv)
 		userFilePath = argv[1];
 		itemFilePath = argv[2];
 		transactionFilePath = argv[3];
+	}
+
+	// Create transaction file if it does not exist
+	{
+		std::fstream transactionFile;
+		transactionFile.open(transactionFilePath, std::ios::in);
+		if (!transactionFile.is_open())
+		{
+			transactionFile.open(transactionFilePath, std::ios::out);
+			transactionFile.close();
+		}
 	}
 
 	// Load files

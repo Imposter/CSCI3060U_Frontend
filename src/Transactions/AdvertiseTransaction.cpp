@@ -11,7 +11,7 @@ std::string AdvertiseTransaction::Serializer::Serialize(std::shared_ptr<Advertis
 	stream << String::PadRight(data->itemName, ' ', ITEM_NAME_LENGTH) << ' ';
 	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
 	stream << String::PadLeft(std::to_string(data->daysToAuction), '0', 3) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->minBid), '0', 6);
+	stream << String::PadLeft(String::Format("%.2f", data->minBid), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }

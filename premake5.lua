@@ -5,8 +5,8 @@ workspace 'group7'
 project 'frontend'
 	kind 'ConsoleApp'
 	language 'C++'
-	cppdialect "C++14"
-	toolset 'clang' -- NOTE: This will not work with Visual Studio (TODO: Use command line args to determine which toolset to use -- premake docs)
+	cppdialect 'C++14'
+	toolset 'clang'
 	targetdir 'build/%{cfg.buildCfg}'
 	
 	files {

@@ -10,7 +10,7 @@ std::string BasicTransaction::Serializer::Serialize(std::shared_ptr<BasicTransac
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
 	stream << String::PadRight(data->userName, ' ', USERNAME_LENGTH) << ' ';
 	stream << GetUserTypeString(data->userType) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', 6);
+	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }
