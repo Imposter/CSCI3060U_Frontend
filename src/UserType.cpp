@@ -28,5 +28,19 @@ UserType GetUserTypeFromString(std::string &type)
 	if (type == "AA")
 		return kUserType_Admin;
 
-	return kUserType_Buy;
+	return kUserType_None;
+}
+
+UserType GetUserTypeFromLongString(std::string &type)
+{
+	if (type == "buy-standard")
+		return kUserType_Buy;
+	if (type == "sell-standard")
+		return kUserType_Sell;
+	if (type == "full-standard")
+		return kUserType_Full;
+	if (type == "admin")
+		return kUserType_Admin;
+
+	return kUserType_None;
 }

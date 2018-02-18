@@ -51,11 +51,17 @@ void File::WriteLine(std::string line)
 void File::Rewind()
 {
 	if (file.is_open())
-		file.seekg(std::ios::beg);
+	{
+		file.clear();
+		file.seekg(0, std::ios::beg);
+	}
 }
 
 void File::Forward()
 {
 	if (file.is_open())
-		file.seekg(std::ios::end);
+	{
+		file.clear();
+		file.seekg(0, std::ios::end);
+	}
 }

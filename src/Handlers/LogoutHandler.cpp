@@ -1,7 +1,6 @@
 #include "LogoutHandler.hpp"
-
-LogoutHandler::LogoutHandler(TransactionFile &transactionFile)
-	: transactionFile(transactionFile) {}
+#include "../Transactions/LogoutTransaction.hpp"
+#include <iostream>
 
 TransactionType LogoutHandler::GetType()
 {
@@ -15,9 +14,17 @@ std::string LogoutHandler::GetName()
 
 std::shared_ptr<Transaction> LogoutHandler::Handle(std::shared_ptr<User> &user)
 {
-	// TODO: Perform input/checks
+	// Temporarily copy pointer to user
+	std::shared_ptr<User> tempUser = user;
 
-	return NULL;
+	// Set as not logged in
+	user = NULL;
+
+	// Print session end message
+	std::cout << "Session terminated" << std::endl;
+	std::cout << "Goodbye " << tempUser->GetName() << std::endl;
+
+	return std::make_shared<LogoutTransaction>(tempUser->GetName(), tempUser->GetType(), tempUser->GetCredits());
 }
 
 bool LogoutHandler::IsAllowed(std::shared_ptr<User> &user)

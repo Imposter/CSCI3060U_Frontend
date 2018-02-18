@@ -8,6 +8,11 @@
 enum UserType
 {
 	/**
+	 * \brief Signifies an invalid user type
+	 */
+	kUserType_None = -1,
+
+	/**
      * \brief Users of this type can only bid on items, and are non-privileged
      */
     kUserType_Buy,
@@ -37,8 +42,15 @@ enum UserType
 std::string GetUserTypeString(UserType type);
 
 /**
- * \brief Converts a specified user type string to its integer representation
- * \param type 
- * \return 
- */
+* \brief Converts a specified user type string to its integer representation
+* \param type
+* \return
+*/
 UserType GetUserTypeFromString(std::string &type);
+
+/**
+* \brief Converts a user type from string form to its integer representation
+* \param type
+* \return
+*/
+UserType GetUserTypeFromLongString(std::string &type);

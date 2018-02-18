@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Transaction.hpp"
-#include "../Config.hpp"
 #include "../UserType.hpp"
 #include "../Utility/ISerializer.hpp"
 
@@ -10,7 +9,7 @@
 */
 class BasicTransaction : public Transaction
 {
-    char userName[USERNAME_LENGTH];
+    std::string userName;
     UserType userType;
 	float credits;
 
@@ -40,5 +39,23 @@ public:
 	 * \brief Initializes transaction with transaction type
 	 * \param type Transaction type
 	 */
-	explicit BasicTransaction(TransactionType type, const char *userName, UserType userType, float credits);
+	explicit BasicTransaction(TransactionType type, const std::string &userName, UserType userType, float credits);
+
+	/**
+	 * \brief Gets user name
+	 * \return User name
+	 */
+	const std::string &GetUserName() const;
+
+	/**
+	 * \brief Gets user's type
+	 * \return User type
+	 */
+	const UserType &GetUserType() const;
+
+	/**
+	 * \brief Gets user's credits
+	 * \return Account credits
+	 */
+	const float &GetCredits() const;
 };

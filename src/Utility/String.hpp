@@ -27,8 +27,6 @@ public:
 	 */
 	static std::string PadRight(std::string target, char character, int count);
 
-
-
 	/**
 	 * \brief Formats a string using a C format and argument style
 	 * \param format C string format
@@ -36,4 +34,11 @@ public:
 	 * \return Formatted string
 	 */
 	static std::string Format(std::string format, ...);
+
+	/**
+	 * \brief Checks if a string is a number or not, cannot include commas. Decimals are allowed
+	 * \param string Number string
+	 * \return Whether the string is a number or not
+	 */
+	static bool IsNumber(const std::string &string);
 };

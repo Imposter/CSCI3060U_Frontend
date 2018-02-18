@@ -26,19 +26,19 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Get username
-	std::string username;
+	std::string userName;
 	std::cout << "Enter your username: ";
-	getline(std::cin, username);
+	getline(std::cin, userName);
 
 	// Check username length
-	if (username.size() > USERNAME_LENGTH)
+	if (userName.size() > USERNAME_LENGTH)
 	{
 		std::cerr << "ERROR: Invalid username (too long)" << std::endl;
 		return NULL;
 	}
 
 	// Check if account exists
-	auto userAccount = userFile.GetUserByName(username);
+	auto userAccount = userFile.GetUserByName(userName);
 	if (!userAccount)
 	{
 		std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
@@ -51,11 +51,13 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	else
 		std::cout << "Login accepted" << std::endl;
 
+	std::cout << "Welcome, " << userAccount->GetName() << std::endl;
+
 	// Set user logged in
 	user = userAccount;
 
 	// Return a successful transaction
-	return std::make_shared<LoginTransaction>(user->GetName().c_str(), user->GetType(), user->GetCredits());
+	return std::make_shared<LoginTransaction>(user->GetName(), user->GetType(), user->GetCredits());
 }
 
 bool LoginHandler::IsAllowed(std::shared_ptr<User> &user)

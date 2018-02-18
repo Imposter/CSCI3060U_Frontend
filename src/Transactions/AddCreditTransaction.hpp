@@ -11,5 +11,5 @@ public:
 	/**
 	 * \brief Initializes transaction with add credit type
 	 */
-	explicit AddCreditTransaction(const char *userName, UserType userType, float credits);
+	explicit AddCreditTransaction(const std::string &userName, UserType userType, float credits);
 };

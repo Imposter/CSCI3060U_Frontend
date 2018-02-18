@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Transaction.hpp"
-#include "../Config.hpp"
 #include "../UserType.hpp"
 #include "../Utility/ISerializer.hpp"
 
@@ -10,8 +9,8 @@
 */
 class AdvertiseTransaction : public Transaction
 {
-    char itemName[ITEM_NAME_LENGTH];
-	char sellerUserName[USERNAME_LENGTH];
+	std::string itemName;
+	std::string sellerUserName;
 	int daysToAuction;
 	float minBid;
 
@@ -40,5 +39,29 @@ public:
 	/**
 	* \brief Default constructor initializing transaction with advertise type
 	*/
-	explicit AdvertiseTransaction(const char *itemName, const char *sellerUserName, int daysToAuction, float minBid);
+	explicit AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, float minBid);
+
+	/**
+	* \brief Gets item name
+	* \return Item name
+	*/
+	const std::string &GetItemName() const;
+
+	/**
+	* \brief Gets seller's user name
+	* \return Seller's user name
+	*/
+	const std::string &GetSellerUserName() const;
+
+	/**
+	* \brief Gets days left to auction
+	* \return Days left to the auction's end
+	*/
+	const int &GetDaysToAuction() const;
+
+	/**
+	* \brief Gets the item's minimum bid
+	* \return Minimum bid
+	*/
+	const float &GetMinimumBid() const;
 };

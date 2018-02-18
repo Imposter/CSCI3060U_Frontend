@@ -1,26 +1,52 @@
 #include "RefundTransaction.hpp"
+#include "../Config.hpp"
+#include "../Utility/String.hpp"
 #include <algorithm>
+#include <sstream>
 
 std::string RefundTransaction::Serializer::Serialize(std::shared_ptr<RefundTransaction> data)
 {
-	// TODO: Implement
-	return {};
+	std::stringstream stream;
+	stream << GetTransactionTypeString(data->GetType()) << ' ';
+	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', 6);
+
+	return stream.str();
 }
 
 std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(std::string serializedData)
 {
-	// TODO: Implement
-	return NULL;
+	std::stringstream stream(serializedData);
+
+	std::string buyerUserName;
+	std::string sellerUserName;
+	float credits;
+
+	// Ignore type
+	stream.ignore();
+
+	stream >> buyerUserName;
+	stream >> sellerUserName;
+	stream >> credits;
+
+	return std::make_shared<RefundTransaction>(buyerUserName, sellerUserName, credits);
 }
 
-RefundTransaction::RefundTransaction(const char *buyerUserName, const char *sellerUserName, float credits)
-	: Transaction(kTransactionType_Refund), credits(credits)
-{
-	// Copy buyer user name
-	int len = strlen(buyerUserName);
-	strncpy_s(this->buyerUserName, buyerUserName, std::min(len, USERNAME_LENGTH));
+RefundTransaction::RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, float credits)
+	: Transaction(kTransactionType_Refund), buyerUserName(buyerUserName), sellerUserName(sellerUserName), credits(credits) {}
 
-	// Copy seller user name
-	len = strlen(sellerUserName);
-	strncpy_s(this->sellerUserName, sellerUserName, std::min(len, USERNAME_LENGTH));
+const std::string &RefundTransaction::GetBuyerUserName() const
+{
+	return buyerUserName;
+}
+
+const std::string &RefundTransaction::GetSellerUserName() const
+{
+	return sellerUserName;
+}
+
+const float &RefundTransaction::GetCredits() const
+{
+	return credits;
 }

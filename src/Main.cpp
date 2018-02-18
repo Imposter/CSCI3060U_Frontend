@@ -9,6 +9,8 @@
 
 #include "Handlers/IHandler.hpp"
 #include "Handlers/LoginHandler.hpp"
+#include "Handlers/LogoutHandler.hpp"
+#include "Handlers/CreateHandler.hpp"
 
 #include <iostream>
 #include <vector>
@@ -71,7 +73,9 @@ int main(int argc, char **argv)
 
 	// Create handlers
 	std::vector<std::shared_ptr<IHandler>> handlers = {
-		std::make_shared<LoginHandler>(userFile)
+		std::make_shared<LoginHandler>(userFile),
+		std::make_shared<LogoutHandler>(),
+		std::make_shared<CreateHandler>(transactionFile, userFile)
 	};
 
 	// Pointer for current user
@@ -84,6 +88,10 @@ int main(int argc, char **argv)
         std::cout << "Auction> ";
         getline(std::cin, input);
 
+		// Ignore empty lines
+		if (input.empty())
+			continue;
+
 		if (input == "?")
 		{
 			// Output all the available commands
@@ -91,11 +99,15 @@ int main(int argc, char **argv)
 			for (auto handler : handlers)
 				if (handler->IsAvailable(user) && handler->IsAllowed(user))
 					std::cout << "> " << handler->GetName() << std::endl;
+			if (!user)
+				std::cout << "> exit" << std::endl;
 
 			// We've handled the command, so wait for another one
 			continue;
 		}
-		if (input == "exit")
+
+		// Only be available once a user has logged out, or hasn't logged in
+		if (!user && input == "exit")
 		{
 			// Save and close files
 			transactionFile.Close();

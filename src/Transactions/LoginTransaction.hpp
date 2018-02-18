@@ -11,5 +11,5 @@ public:
 	/**
 	 * \brief Initializes transaction with login type
 	 */
-	explicit LoginTransaction(const char *userName, UserType userType, float credits);
+	explicit LoginTransaction(const std::string &userName, UserType userType, float credits);
 };

@@ -8,15 +8,7 @@
  */
 class LogoutHandler : public IHandler
 {
-	TransactionFile &transactionFile;
-
 public:
-	/**
-	 * \brief Initializes logout handler with transactions file
-	 * \param transactionFile Daily transactions file
-	 */
-	explicit LogoutHandler(TransactionFile &transactionFile);
-
 	/**
 	 * \brief Returns logout transaction type
 	 * \return Logout transaction type

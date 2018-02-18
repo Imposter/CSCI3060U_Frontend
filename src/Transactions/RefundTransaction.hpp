@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Transaction.hpp"
-#include "../Config.hpp"
 #include "../UserType.hpp"
 #include "../Utility/ISerializer.hpp"
 
@@ -10,8 +9,8 @@
  */
 class RefundTransaction : public Transaction
 {
-    char buyerUserName[USERNAME_LENGTH];
-    char sellerUserName[USERNAME_LENGTH];
+	std::string buyerUserName;
+	std::string sellerUserName;
 	float credits;
 
 public:
@@ -39,5 +38,23 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with refund type
 	 */
-	explicit RefundTransaction(const char *buyerUserName, const char *sellerUserName, float credits);
+	explicit RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, float credits);
+
+	/**
+	* \brief Gets buyer's user name
+	* \return Buyer's user name
+	*/
+	const std::string &GetBuyerUserName() const;
+
+	/**
+	* \brief Gets seller's user name
+	* \return Seller's user name
+	*/
+	const std::string &GetSellerUserName() const;
+
+	/**
+	* \brief Gets the refunded credits
+	* \return Refunded credits
+	*/
+	const float &GetCredits() const;
 };

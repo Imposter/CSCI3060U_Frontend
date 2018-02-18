@@ -44,3 +44,8 @@ std::string String::Format(std::string format, ...)
 
 	return result;
 }
+
+bool String::IsNumber(const std::string &string)
+{
+	return string.find_first_not_of("0123456789.") == std::string::npos && count(string.begin(), string.end(), '.') <= 1;
+}

@@ -10,9 +10,9 @@
  */
 class BidTransaction : public Transaction
 {
-    char itemName[ITEM_NAME_LENGTH];
-    char sellerUserName[USERNAME_LENGTH];
-    char buyerUserName[USERNAME_LENGTH];
+    std::string itemName;
+	std::string sellerUserName;
+	std::string buyerUserName;
 	float newBid;
 
 public:
@@ -40,5 +40,29 @@ public:
 	/**
 	 * \brief Default constructor initializing transaction with bid type
 	 */
-	explicit BidTransaction(const char *itemName, const char *sellerUserName, const char *buyerUserName, float newBid);
+	explicit BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, float newBid);
+
+	/**
+	* \brief Gets item name
+	* \return Item name
+	*/
+	const std::string &GetItemName() const;
+
+	/**
+	* \brief Gets seller's user name
+	* \return Seller's user name
+	*/
+	const std::string &GetSellerUserName() const;
+
+	/**
+	* \brief Gets buyer's user name
+	* \return Buyer's user name
+	*/
+	const std::string &GetBuyerUserName() const;
+
+	/**
+	* \brief Gets the item's new bid
+	* \return New bid
+	*/
+	const float &GetNewBid() const;
 };

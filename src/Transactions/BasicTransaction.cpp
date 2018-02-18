@@ -1,4 +1,5 @@
 #include "BasicTransaction.hpp"
+#include "../Config.hpp"
 #include "../Utility/String.hpp"
 #include <algorithm>
 #include <sstream>
@@ -24,16 +25,27 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 	float userCredits;
 
 	stream >> type;
+	stream >> userName;
 	stream >> userType;
-	stream >> type;
 	stream >> userCredits;
 
-	return std::make_shared<BasicTransaction>(static_cast<TransactionType>(type), userName.c_str(), GetUserTypeFromString(userType), userCredits);
+	return std::make_shared<BasicTransaction>(static_cast<TransactionType>(type), userName, GetUserTypeFromString(userType), userCredits);
 }
 
-BasicTransaction::BasicTransaction(TransactionType type, const char *userName, UserType userType, float credits)
-	: Transaction(type), userName{}, userType(userType), credits(credits)
+BasicTransaction::BasicTransaction(TransactionType type, const std::string &userName, UserType userType, float credits)
+	: Transaction(type), userName(userName), userType(userType), credits(credits) {}
+
+const std::string &BasicTransaction::GetUserName() const
 {
-	int len = strlen(userName);
-	strncpy_s(this->userName, userName, std::min(len, USERNAME_LENGTH));
+	return userName;
+}
+
+const UserType &BasicTransaction::GetUserType() const
+{
+	return userType;
+}
+
+const float &BasicTransaction::GetCredits() const
+{
+	return credits;
 }
