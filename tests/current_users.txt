@@ -1,5 +1,5 @@
 admin           AA 999999.99
-fulluser        FS 699999.99
+fulluser        FS 000000.00
 selluser        SS 009999.99
 buyuser         BS 998999.99
 END
