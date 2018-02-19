@@ -4,8 +4,8 @@
 build/
 
 # Test results
-tests/**.out
-tests/**.atf
+tests/**/*.out
+tests/**/*.atf
 
 # User-specific files
 *.suo
