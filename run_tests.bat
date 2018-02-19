@@ -9,7 +9,9 @@ for /r %%f in (*.inp) do (
     set TEST_PATH=%%~dpf
     set TEST_FILE=%%~nxf
 
-    echo Running test with input: %%f
+    echo Running test %TEST_NAME%
+    echo Test path: %TEST_PATH%
+    echo Test file: %TEST_FILE%
 
     REM Remove previous transaction test information to prevent appending and recreate the file
     del %TEST_PATH%\\%TEST_NAME%.atf
@@ -20,10 +22,19 @@ for /r %%f in (*.inp) do (
     if errorlevel 1 (
         REM An error occurred while running the frontend, stop all tests and let the user know
         echo Frontend exitted unexpectedly, check %TEST_PATH%\\%TEST_NAME%.out for more information...
-        goto :eof
+        goto end
     )
 
-    REM TODO: Check if the test was successful
+    REM Check if the test failed
+    fc %TEST_PATH%\\%TEST_NAME%.etf %TEST_PATH%\\%TEST_NAME%.atf
+    if errorlevel 1 (
+        REM A test failed, stop all tests and let the user know
+        echo Test %TEST_NAME% failed
+        goto end
+    ) else (
+        echo Test %TEST_NAME% succeeded!
+    )
 )
 
-cd ..
+:end
+    cd ..

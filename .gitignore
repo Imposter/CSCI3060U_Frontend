@@ -3,6 +3,9 @@
 # Build results
 build/
 
+# Test results
+test/**.out
+
 # User-specific files
 *.suo
 *.user
