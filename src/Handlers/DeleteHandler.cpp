@@ -1,4 +1,10 @@
 #include "DeleteHandler.hpp"
+#include "../Config.hpp"
+#include "../Transactions/BasicTransaction.hpp"
+#include "../Transactions/DeleteTransaction.hpp"
+#include "../Utility/String.hpp"
+#include <iostream>
+#include <algorithm>
 
 DeleteHandler::DeleteHandler(TransactionFile &transactionFile, UserFile &userFile)
 	: transactionFile(transactionFile), userFile(userFile) {}
@@ -15,12 +21,46 @@ std::string DeleteHandler::GetName()
 
 std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 {
-    // TODO: Perform inputs/checks
+	// Get username
+	std::string userName;
+	std::cout << "Enter username: ";
+	getline(std::cin, userName);
 
-	// TODO/NOTE: Do not delete users that were created on the same day, as they are not present in the current users file
-	// TODO/NOTE: Do not allow any operations on new users/items that haven't been through the backend first
+	// Check if the username refers to the current user
+	if (userName == user->GetName())
+	{
+		std::cerr << "ERROR: Cannot delete active user" << std::endl;
+		return NULL;
+	}
 
-	return NULL;
+	// Check if account exists in the user file
+	auto userAccount = userFile.GetUserByName(userName);
+	if (!userAccount)
+	{
+		std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+		return NULL;
+	}
+
+	// Check if the account is already deleted
+	for (auto t : transactionFile.GetTransactions(kTransactionType_Delete))
+	{
+		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
+		if (transaction->GetUserName() == userName)
+		{
+			std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+			return NULL;
+		}
+	}
+
+	// Remove user from users file
+	auto users = userFile.GetUsers();
+	users.erase(remove(users.begin(), users.end(), userAccount), users.end());
+
+	// Prompt success
+	std::cout << "Deleted user " << userName << " of type " << GetUserTypeLongString(userAccount->GetType()) << " with " << String::Format("%.2f", userAccount->GetCredits()) << " credits" << std::endl;
+
+	// Return transaction
+	return std::make_shared<DeleteTransaction>(userAccount->GetName(), userAccount->GetType(), userAccount->GetCredits());
 }
 
 bool DeleteHandler::IsAllowed(std::shared_ptr<User> &user)

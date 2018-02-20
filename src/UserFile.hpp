@@ -26,6 +26,12 @@ public:
     bool Open();
 
 	/**
+	 * \brief Returns all of the user accounts that are currently present within the system
+	 * \return All user accounts present in the user file
+	 */
+	std::vector<std::shared_ptr<User>> &GetUsers();
+
+	/**
 	 * \brief Returns a user in the file with the specified name
 	 * \param userName Username to search
 	 * \return User with specified name, if any

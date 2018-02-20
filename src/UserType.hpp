@@ -33,24 +33,30 @@ enum UserType
     kUserType_Admin
 };
 
-
 /**
- * \brief Converts a specified user type to its string representation
- * \param type User type
- * \return User type in string representation
- */
+* \brief Converts a specified user type to its string representation
+* \param type User type
+* \return User type in string representation
+*/
 std::string GetUserTypeString(UserType type);
 
 /**
+* \brief Converts a specified user type to its long string representation
+* \param type User type
+* \return User type in long string representation
+*/
+std::string GetUserTypeLongString(UserType type);
+
+/**
 * \brief Converts a specified user type string to its integer representation
-* \param type
-* \return
+* \param type User type in short form
+* \return User type in integer representation
 */
 UserType GetUserTypeFromString(std::string &type);
 
 /**
 * \brief Converts a user type from string form to its integer representation
-* \param type
-* \return
+* \param type User type in long form
+* \return User type in integer representation
 */
 UserType GetUserTypeFromLongString(std::string &type);

@@ -33,6 +33,11 @@ bool UserFile::Open()
     return true;
 }
 
+std::vector<std::shared_ptr<User>> &UserFile::GetUsers()
+{
+	return users;
+}
+
 std::shared_ptr<User> UserFile::GetUserByName(std::string userName)
 {
     std::shared_ptr<User> result;

@@ -11,6 +11,7 @@
 #include "Handlers/LoginHandler.hpp"
 #include "Handlers/LogoutHandler.hpp"
 #include "Handlers/CreateHandler.hpp"
+#include "Handlers/DeleteHandler.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -87,7 +88,8 @@ int main(int argc, char **argv)
 	std::vector<std::shared_ptr<IHandler>> handlers = {
 		std::make_shared<LoginHandler>(userFile),
 		std::make_shared<LogoutHandler>(),
-		std::make_shared<CreateHandler>(transactionFile, userFile)
+		std::make_shared<CreateHandler>(transactionFile, userFile),
+		std::make_shared<DeleteHandler>(transactionFile, userFile)
 	};
 
 	// Pointer for current user

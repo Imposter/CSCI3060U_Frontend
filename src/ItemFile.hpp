@@ -26,6 +26,12 @@ public:
     bool Open();
 
 	/**
+	 * \brief Returns all of the items that are currently available in the system
+	 * \return All of the items that are present within the item file
+	 */
+	std::vector<std::shared_ptr<Item>> &GetItems();
+
+	/**
 	 * \brief Attempts to find an item by the specified name
 	 * \param itemName Item name to search for
 	 * \return Pointer to item found, if any

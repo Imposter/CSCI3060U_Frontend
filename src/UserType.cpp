@@ -2,17 +2,28 @@
 
 std::string GetUserTypeString(UserType type)
 {
-	switch (type)
-	{
-	case kUserType_Buy:
+	if (type == kUserType_Buy)
 		return "BS";
-	case kUserType_Sell:
+	if (type == kUserType_Sell)
 		return "SS";
-	case kUserType_Full:
+	if (type == kUserType_Full)
 		return "FS";
-	case kUserType_Admin:
+	if (type == kUserType_Admin)
 		return "AA";
-	}
+
+	return "";
+}
+
+std::string GetUserTypeLongString(UserType type)
+{
+	if (type == kUserType_Buy)
+		return "buy-standard";
+	if (type == kUserType_Sell)
+		return "sell-standard";
+	if (type == kUserType_Full)
+		return "full-standard";
+	if (type == kUserType_Admin)
+		return "admin";
 
 	return "";
 }

@@ -83,7 +83,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Prompt success
-	std::cout << "Created user " << userName << " of type " << GetUserTypeString(type) << " with " << String::Format("%.2f", numCredits) << " credits" << std::endl;
+	std::cout << "Created user " << userName << " of type " << GetUserTypeLongString(type) << " with " << String::Format("%.2f", numCredits) << " credits" << std::endl;
 
 	return std::make_shared<CreateTransaction>(userName, type, numCredits);
 }

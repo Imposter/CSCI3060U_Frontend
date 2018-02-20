@@ -37,6 +37,11 @@ bool ItemFile::Open()
     return true;
 }
 
+std::vector<std::shared_ptr<Item>> & ItemFile::GetItems()
+{
+	return items;
+}
+
 std::shared_ptr<Item> ItemFile::GetItemByName(std::string itemName)
 {
     std::shared_ptr<Item> result;
