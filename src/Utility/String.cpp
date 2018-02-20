@@ -19,7 +19,7 @@ std::string String::PadRight(std::string target, char character, int count)
 	if (count - static_cast<int>(target.size()) <= 0)
 		return target;
 
-	auto output = target;
+	std::string output = target;
 	
 	output.append(count - target.size(), character);
 	
@@ -31,7 +31,7 @@ std::string String::Format(std::string format, ...)
 	va_list arguments;
 	va_start(arguments, format);
 
-	auto length = vsnprintf(NULL, 0, format.c_str(), arguments);
+	auto length = vsnprintf(NULL, 0, format.c_str(), arguments) + 1;
 
 	std::string result;
 	result.resize(length);
@@ -39,6 +39,9 @@ std::string String::Format(std::string format, ...)
 	vsnprintf(const_cast<char *>(result.c_str()), length, format.c_str(), arguments);
 
 	va_end(arguments);
+
+	// Remove null terminator
+	result.resize(length - 1);
 
 	return result;
 }
