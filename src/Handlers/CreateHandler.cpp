@@ -91,7 +91,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 bool CreateHandler::IsAllowed(std::shared_ptr<User> &user)
 {
 	// Ensure the user is an admin
-	return user != NULL && user->GetType() == kUserType_Admin;
+	return user->GetType() == kUserType_Admin;
 }
 
 bool CreateHandler::IsAvailable(std::shared_ptr<User> &user)

@@ -129,7 +129,7 @@ int main(int argc, char **argv)
 			break;
 		}
 
-		bool commandFound = false;
+		auto commandFound = false;
 		for (auto handler : handlers) 
 		{
 			if (input == handler->GetName())
@@ -137,17 +137,17 @@ int main(int argc, char **argv)
 				// Set as handled
 				commandFound = true;
 
-				// Check if command is allowed
-				if (!handler->IsAllowed(user))
-				{
-					std::cerr << "ERROR: Access denied" << std::endl;
-					break;
-				}
-
 				// Check if command is available
 				if (!handler->IsAvailable(user))
 				{
 					std::cerr << "ERROR: Not available" << std::endl;
+					break;
+				}
+
+				// Check if command is allowed
+				if (!handler->IsAllowed(user))
+				{
+					std::cerr << "ERROR: Access denied" << std::endl;
 					break;
 				}
 

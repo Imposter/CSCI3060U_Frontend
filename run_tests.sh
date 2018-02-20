@@ -53,5 +53,7 @@ for f in `find . -name "*.inp" -type f`; do
     fi
 done
 
+echo All tests completed successfully!
+
 # Return to project root folder
 cd ..

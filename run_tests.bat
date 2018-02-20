@@ -48,6 +48,8 @@ for /r %%f in (*.inp) do (
     )
 )
 
+echo All tests completed successfully!
+
 :end
     :: Return to project root folder
     cd ..
