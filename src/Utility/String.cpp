@@ -1,4 +1,5 @@
 #include "String.hpp"
+#include <algorithm>
 
 std::string String::PadLeft(std::string target, char character, int count)
 {
@@ -30,12 +31,12 @@ std::string String::Format(std::string format, ...)
 	va_list arguments;
 	va_start(arguments, format);
 
-	int length = _vscprintf(format.c_str(), arguments) + 1;
+	int length = vsnprintf(NULL, 0, format.c_str(), arguments) + 1;
 
 	std::string result;
 	result.resize(length);
 
-	vsprintf_s(const_cast<char *>(result.c_str()), length, format.c_str(), arguments);
+	vsnprintf(const_cast<char *>(result.c_str()), length, format.c_str(), arguments);
 
 	va_end(arguments);
 

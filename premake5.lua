@@ -13,6 +13,11 @@ project 'frontend'
 		'src/**.hpp',
 		'src/**.cpp'
 	}
+
+	filter 'platforms:Win32'
+		system 'Windows'
+		architecture 'x32'
+		defines { '_CRT_SECURE_NO_WARNINGS' }
 	
 	filter 'configurations:Debug'
 		defines { 'DEBUG' }

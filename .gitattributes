@@ -1,5 +1,5 @@
 # Default line endings behaviour
-* text=auto
+* text=false
 
 # Sources
 *.c text

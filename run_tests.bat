@@ -1,12 +1,12 @@
 @echo off
 
-REM Evaluate local variables on execution
+:: Evaluate local variables on execution
 setlocal EnableDelayedExpansion
 
-REM Clear screen
+:: Clear screen
 cls
 
-REM Run all tests
+:: Run all tests
 echo ==========================================================
 echo Running frontend tests
 cd tests
@@ -22,23 +22,23 @@ for /r %%f in (*.inp) do (
     echo Test file: !TEST_FILE!
     echo:
 
-    REM Remove previous transaction test information to prevent appending and recreate the file
+    :: Remove previous transaction test information to prevent appending and recreate the file
     del /q !TEST_PATH!\\!TEST_NAME!.atf >NUL
     copy /b NUL !TEST_PATH!\\!TEST_NAME!.atf >NUL
 
-    REM Run program with redirected IO
+    :: Run program with redirected IO
     "..\\build\\frontend.exe" current_users.txt available_items.txt !TEST_PATH!\\!TEST_NAME!.atf <%%f >!TEST_PATH!\\!TEST_NAME!.out 2>&1
     if errorlevel 1 (
-        REM An error occurred while running the frontend, stop all tests and let the user know
+        :: An error occurred while running the frontend, stop all tests and let the user know
         echo Frontend exitted unexpectedly, check !TEST_PATH!\\!TEST_NAME!.out for more information...
         echo:
         goto end
     )
 
-    REM Check if the test failed
+    :: Check if the test failed
     fc !TEST_PATH!\\!TEST_NAME!.etf !TEST_PATH!\\!TEST_NAME!.atf
     if errorlevel 1 (
-        REM A test failed, stop all tests and let the user know
+        :: A test failed, stop all tests and let the user know
         echo Test !TEST_NAME! failed
         echo:
         goto end
@@ -49,8 +49,8 @@ for /r %%f in (*.inp) do (
 )
 
 :end
-    REM Return to project root folder
+    :: Return to project root folder
     cd ..
 
-    REM Restore local variable evaluation
+    :: Restore local variable evaluation
     endlocal
