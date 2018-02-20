@@ -26,7 +26,7 @@
 int main(int argc, char **argv)
 {
 	// Get files
-	std::string userFilePath = "data/users.txt";
+	std::string userFilePath = "data/current_users.txt";
 	std::string itemFilePath = "data/available_items.txt";
 	std::string transactionFilePath = "data/transactions.txt";
 
