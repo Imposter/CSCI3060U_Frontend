@@ -1,4 +1,5 @@
 #include "UserFile.hpp"
+#include "Utility/String.hpp"
 #include <sstream>
 
 UserFile::UserFile(std::string fileName)
@@ -45,7 +46,8 @@ std::shared_ptr<User> UserFile::GetUserByName(std::string userName)
     // Find user by name
     for (auto user : users) 
     {
-        if (user->GetName() == userName)
+		// Perform a case insensitive comparison to guarantee uniqueness
+        if (String::Equals(user->GetName(), userName, true))
         {
             result = user;
             break;

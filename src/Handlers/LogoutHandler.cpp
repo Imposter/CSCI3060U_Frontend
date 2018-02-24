@@ -15,7 +15,7 @@ std::string LogoutHandler::GetName()
 std::shared_ptr<Transaction> LogoutHandler::Handle(std::shared_ptr<User> &user)
 {
 	// Temporarily copy pointer to user
-	std::shared_ptr<User> tempUser = user;
+	auto tempUser = user;
 
 	// Set as not logged in
 	user = NULL;
@@ -25,12 +25,6 @@ std::shared_ptr<Transaction> LogoutHandler::Handle(std::shared_ptr<User> &user)
 	std::cout << "Goodbye " << tempUser->GetName() << std::endl;
 
 	return std::make_shared<LogoutTransaction>(tempUser->GetName(), tempUser->GetType(), tempUser->GetCredits());
-}
-
-bool LogoutHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// Logout is authorized for everyone
-	return true;
 }
 
 bool LogoutHandler::IsAvailable(std::shared_ptr<User> &user)

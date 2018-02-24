@@ -40,13 +40,6 @@ public:
 	std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) override;
 
 	/**
-	 * \brief Returns if user is allowed to use the create command
-	 * \param user User to check against
-	 * \return Create command allowed for user
-	 */
-	bool IsAllowed(std::shared_ptr<User> &user) override;
-
-	/**
 	 * \brief Returns if the create command is available for the user
 	 * \param user User to check against
 	 * \return Create command available for user

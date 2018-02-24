@@ -12,6 +12,7 @@
 #include "Handlers/LogoutHandler.hpp"
 #include "Handlers/CreateHandler.hpp"
 #include "Handlers/DeleteHandler.hpp"
+#include "Handlers/AdvertiseHandler.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -86,10 +87,11 @@ int main(int argc, char **argv)
 
 	// Create handlers
 	std::vector<std::shared_ptr<IHandler>> handlers = {
-		std::make_shared<LoginHandler>(userFile),
+		std::make_shared<LoginHandler>(transactionFile, userFile),
 		std::make_shared<LogoutHandler>(),
 		std::make_shared<CreateHandler>(transactionFile, userFile),
-		std::make_shared<DeleteHandler>(transactionFile, userFile)
+		std::make_shared<DeleteHandler>(transactionFile, userFile),
+		std::make_shared<AdvertiseHandler>(transactionFile, itemFile),
 	};
 
 	// Pointer for current user
@@ -111,7 +113,7 @@ int main(int argc, char **argv)
 			// Output all the available commands
 			std::cout << "Available commands:" << std::endl;
 			for (auto handler : handlers)
-				if (handler->IsAvailable(user) && handler->IsAllowed(user))
+				if (handler->IsAvailable(user))
 					std::cout << "> " << handler->GetName() << std::endl;
 			if (!user)
 				std::cout << "> exit" << std::endl;
@@ -141,13 +143,6 @@ int main(int argc, char **argv)
 
 				// Check if command is available
 				if (!handler->IsAvailable(user))
-				{
-					std::cerr << "ERROR: Not available" << std::endl;
-					break;
-				}
-
-				// Check if command is allowed
-				if (!handler->IsAllowed(user))
 				{
 					std::cerr << "ERROR: Access denied" << std::endl;
 					break;

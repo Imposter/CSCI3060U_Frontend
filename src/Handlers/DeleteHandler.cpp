@@ -63,12 +63,6 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 	return std::make_shared<DeleteTransaction>(userAccount->GetName(), userAccount->GetType(), userAccount->GetCredits());
 }
 
-bool DeleteHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// Ensure the user is an admin
-	return user->GetType() == kUserType_Admin;
-}
-
 bool DeleteHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// Ensure the user is logged in and is an admin

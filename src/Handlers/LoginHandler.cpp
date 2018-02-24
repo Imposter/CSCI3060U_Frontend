@@ -3,8 +3,8 @@
 #include "../Transactions/LoginTransaction.hpp"
 #include <iostream>
 
-LoginHandler::LoginHandler(UserFile &userFile)
-	: userFile(userFile) {}
+LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
+	: transactionFile(transactionFile), userFile(userFile) {}
 
 TransactionType LoginHandler::GetType()
 {
@@ -45,6 +45,17 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 		return NULL;
 	}
 
+	// Check if the user is deleted the same day
+	for (auto t : transactionFile.GetTransactions(kTransactionType_Delete))
+	{
+		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
+		if (transaction->GetUserName() == userName)
+		{
+			std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+			return NULL;
+		}
+	}
+
 	// Welcome user differently if they are privileged
 	if (userAccount->GetType() == kUserType_Admin)
 		std::cout << "Privileged login accepted" << std::endl;
@@ -58,12 +69,6 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 
 	// Return a successful transaction
 	return std::make_shared<LoginTransaction>(user->GetName(), user->GetType(), user->GetCredits());
-}
-
-bool LoginHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// Login is authorized for everyone
-	return true;
 }
 
 bool LoginHandler::IsAvailable(std::shared_ptr<User> &user)

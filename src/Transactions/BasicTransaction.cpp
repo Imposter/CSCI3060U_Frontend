@@ -25,7 +25,8 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 	double userCredits;
 
 	stream >> type;
-	stream >> userName;
+	//stream.read(const_cast<char *>(userName.c_str()), USERNAME_LENGTH);
+	stream >> userName;// TODO/NOTE: This does not account for spaces in usernames
 	stream >> userType;
 	stream >> userCredits;
 

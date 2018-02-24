@@ -20,12 +20,6 @@ std::shared_ptr<Transaction> AddCreditHandler::Handle(std::shared_ptr<User> &use
 	return NULL;
 }
 
-bool AddCreditHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// TODO: Implement
-	return false;
-}
-
 bool AddCreditHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement

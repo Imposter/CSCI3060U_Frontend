@@ -11,7 +11,7 @@ std::string BidTransaction::Serializer::Serialize(std::shared_ptr<BidTransaction
 	stream << String::PadRight(data->itemName, ' ', ITEM_NAME_LENGTH) << ' ';
 	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
 	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->newBid), '0', CREDITS_LENGTH);
+	stream << String::PadLeft(String::Format("%.2f", data->newBid), '0', ITEM_PRICE_LENGTH);
 
 	return stream.str();
 }
@@ -20,17 +20,30 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 {
 	std::stringstream stream(serializedData);
 
+	std::string type;
 	std::string itemName;
 	std::string sellerUserName;
 	std::string buyerUserName;
 	double newBid;
 
-	// Ignore type
+	stream >> type;
 	stream.ignore();
 
-	stream >> itemName;
-	stream >> sellerUserName;
-	stream >> buyerUserName;
+	itemName.resize(ITEM_NAME_LENGTH);
+	stream.read(const_cast<char *>(itemName.c_str()), ITEM_NAME_LENGTH);
+	itemName = String::TrimRight(itemName);
+	stream.ignore();
+
+	sellerUserName.resize(USERNAME_LENGTH);
+	stream.read(const_cast<char *>(sellerUserName.c_str()), USERNAME_LENGTH);
+	sellerUserName = String::TrimRight(sellerUserName);
+	stream.ignore();
+
+	buyerUserName.resize(USERNAME_LENGTH);
+	stream.read(const_cast<char *>(buyerUserName.c_str()), USERNAME_LENGTH);
+	buyerUserName = String::TrimRight(buyerUserName);
+	stream.ignore();
+
 	stream >> newBid;
 
 	return std::make_shared<BidTransaction>(itemName, sellerUserName, sellerUserName, newBid);

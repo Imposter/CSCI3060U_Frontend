@@ -1,4 +1,5 @@
 #include "ItemFile.hpp"
+#include "Utility/String.hpp"
 #include <sstream>
 
 ItemFile::ItemFile(std::string fileName)
@@ -37,19 +38,20 @@ bool ItemFile::Open()
     return true;
 }
 
-std::vector<std::shared_ptr<Item>> & ItemFile::GetItems()
+std::vector<std::shared_ptr<Item>> &ItemFile::GetItems()
 {
 	return items;
 }
 
-std::shared_ptr<Item> ItemFile::GetItemByName(std::string itemName)
+std::shared_ptr<Item> ItemFile::GetItemByUserAndName(std::string userName, std::string itemName)
 {
     std::shared_ptr<Item> result;
     
     // Find item by name
     for (auto item : items) 
     {
-        if (item->GetName() == itemName)
+		// Perform a case insensitive check against item name to guarantee uniqueness
+        if (item->GetSellerName() == userName && String::Equals(item->GetName(), itemName, true))
         {
             result = item;
             break;

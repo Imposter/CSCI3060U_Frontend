@@ -40,13 +40,6 @@ public:
 	std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) override;
 
 	/**
-	 * \brief Returns if user is allowed to use the refund command
-	 * \param user User to check against
-	 * \return Refund command allowed for user
-	 */
-	bool IsAllowed(std::shared_ptr<User> &user) override;
-
-	/**
 	 * \brief Returns if the refund command is available for the user
 	 * \param user User to check against
 	 * \return Refund command available for user

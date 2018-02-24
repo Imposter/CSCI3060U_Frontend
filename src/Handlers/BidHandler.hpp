@@ -43,13 +43,6 @@ public:
 	std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) override;
 
 	/**
-	 * \brief Returns if user is allowed to use the bid command
-	 * \param user User to check against
-	 * \return Bid command allowed for user
-	 */
-	bool IsAllowed(std::shared_ptr<User> &user) override;
-
-	/**
 	 * \brief Returns if the bid command is available for the user
 	 * \param user User to check against
 	 * \return Bid command available for user

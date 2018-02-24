@@ -19,15 +19,24 @@ std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(st
 {
 	std::stringstream stream(serializedData);
 
+	std::string type;
 	std::string buyerUserName;
 	std::string sellerUserName;
 	double credits;
 
-	// Ignore type
+	stream >> type;
 	stream.ignore();
 
-	stream >> buyerUserName;
-	stream >> sellerUserName;
+	buyerUserName.resize(USERNAME_LENGTH);
+	stream.read(const_cast<char *>(buyerUserName.c_str()), USERNAME_LENGTH);
+	buyerUserName = String::TrimRight(buyerUserName);
+	stream.ignore();
+
+	sellerUserName.resize(USERNAME_LENGTH);
+	stream.read(const_cast<char *>(sellerUserName.c_str()), USERNAME_LENGTH);
+	sellerUserName = String::TrimRight(sellerUserName);
+	stream.ignore();
+
 	stream >> credits;
 
 	return std::make_shared<RefundTransaction>(buyerUserName, sellerUserName, credits);

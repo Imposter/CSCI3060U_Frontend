@@ -32,9 +32,10 @@ public:
 	std::vector<std::shared_ptr<Item>> &GetItems();
 
 	/**
-	 * \brief Attempts to find an item by the specified name
+	 * \brief Attempts to find an item by the specified name and creator
+	 * \param userName User which created the item
 	 * \param itemName Item name to search for
 	 * \return Pointer to item found, if any
 	 */
-	std::shared_ptr<Item> GetItemByName(std::string itemName);
+	std::shared_ptr<Item> GetItemByUserAndName(std::string userName, std::string itemName);
 };

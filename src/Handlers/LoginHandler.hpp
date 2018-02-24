@@ -3,6 +3,7 @@
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
 #include "../UserFile.hpp"
+#include "../TransactionFile.hpp"
 
 /**
  * \brief Handles console input from user for the login command
@@ -10,13 +11,15 @@
 class LoginHandler : public IHandler
 {
 	UserFile &userFile;
+	TransactionFile &transactionFile;
 
 public:
 	/**
-	 * \brief Initializes login handler with user accounts file
+	 * \brief Initializes login handler with transaction and user accounts files
+	 * \param transactionFile Transaction file
 	 * \param userFile User accounts file
 	 */
-	explicit LoginHandler(UserFile &userFile);
+	explicit LoginHandler(TransactionFile &transactionFile, UserFile &userFile);
 
 	/**
 	 * \brief Returns login transaction type
@@ -36,13 +39,6 @@ public:
 	 * \return LoginTransaction if handling was successful
 	 */
 	std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) override;
-
-	/**
-	 * \brief Returns if user is allowed to use the login command
-	 * \param user User to check against
-	 * \return Login command allowed for user
-	 */
-	bool IsAllowed(std::shared_ptr<User> &user) override;
 
 	/**
 	 * \brief Returns if the login command is available for the user

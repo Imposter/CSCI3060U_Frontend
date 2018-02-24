@@ -11,3 +11,12 @@
 
 // Maximum amount of characters in a credit string
 #define CREDITS_LENGTH 9
+
+// Maximum item price
+#define ITEM_PRICE_MAX 999.99
+
+// Maximum item price length
+#define ITEM_PRICE_LENGTH 6
+
+// Maximum days to auction
+#define ITEM_AUCTION_MAX 100

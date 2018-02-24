@@ -20,12 +20,6 @@ std::shared_ptr<Transaction> RefundHandler::Handle(std::shared_ptr<User> &user)
 	return NULL;
 }
 
-bool RefundHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// TODO: Implement
-	return false;
-}
-
 bool RefundHandler::IsAvailable(std::shared_ptr<User> &user)
 {
 	// TODO: Implement

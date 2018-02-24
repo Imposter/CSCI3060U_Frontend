@@ -40,13 +40,6 @@ public:
 	std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) override;
 
 	/**
-	 * \brief Returns if user is allowed to use the delete command
-	 * \param user User to check against
-	 * \return Delete command allowed for user
-	 */
-	bool IsAllowed(std::shared_ptr<User> &user) override;
-
-	/**
 	 * \brief Returns if the delete command is available for the user
 	 * \param user User to check against
 	 * \return Delete command available for user

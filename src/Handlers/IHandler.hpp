@@ -36,13 +36,6 @@ public:
     virtual std::shared_ptr<Transaction> Handle(std::shared_ptr<User> &user) = 0;
 
 	/**
-     * \brief Used to test if the handler is allowed for the user
-     * \param user User for which the handler will be used
-     * \return Whether the handler is allowed or not
-     */
-    virtual bool IsAllowed(std::shared_ptr<User> &user) = 0;
-
-	/**
      * \brief Used to test if the handler is available for the user in their current state
      * \param user User for which the handler will be used
      * \return Whether the handler is available or not

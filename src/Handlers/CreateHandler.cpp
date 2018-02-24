@@ -42,8 +42,9 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	// Check if the transaction to create a user is already pending
 	for (auto t : transactionFile.GetTransactions(kTransactionType_Create))
 	{
+		// Perform case insensitive comparison to guarantee uniqueness
 		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
-		if (transaction->GetUserName() == userName)
+		if (String::Equals(transaction->GetUserName(), userName, true))
 		{
 			std::cerr << "ERROR: Invalid username (in use)" << std::endl;
 			return NULL;
@@ -75,7 +76,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 		return NULL;
 	}
 
-	double numCredits = atof(credits.c_str());
+	auto numCredits = atof(credits.c_str());
 	if (numCredits > CREDITS_MAX)
 	{
 		std::cerr << "ERROR: Invalid credits (exceeded limit)" << std::endl;
@@ -86,12 +87,6 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	std::cout << "Created user " << userName << " of type " << GetUserTypeLongString(type) << " with " << String::Format("%.2f", numCredits) << " credits" << std::endl;
 
 	return std::make_shared<CreateTransaction>(userName, type, numCredits);
-}
-
-bool CreateHandler::IsAllowed(std::shared_ptr<User> &user)
-{
-	// Ensure the user is an admin
-	return user->GetType() == kUserType_Admin;
 }
 
 bool CreateHandler::IsAvailable(std::shared_ptr<User> &user)
