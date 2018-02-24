@@ -27,7 +27,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	// Check username length
 	if (userName.size() > USERNAME_LENGTH)
 	{
-		std::cerr << "ERROR: Invalid username (too long)" << std::endl;
+		std::cerr << "ERROR: Username is too long" << std::endl;
 		return NULL;
 	}
 
@@ -35,7 +35,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	auto userAccount = userFile.GetUserByName(userName);
 	if (userAccount)
 	{
-		std::cerr << "ERROR: Invalid username (in use)" << std::endl;
+		std::cerr << "ERROR: Username is already in use" << std::endl;
 		return NULL;
 	}
 
@@ -46,7 +46,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (String::Equals(transaction->GetUserName(), userName, true))
 		{
-			std::cerr << "ERROR: Invalid username (in use)" << std::endl;
+			std::cerr << "ERROR: Username is already in use" << std::endl;
 			return NULL;
 		}
 	}
@@ -79,7 +79,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	auto numCredits = atof(credits.c_str());
 	if (numCredits > CREDITS_MAX)
 	{
-		std::cerr << "ERROR: Invalid credits (exceeded limit)" << std::endl;
+		std::cerr << "ERROR: Credits exceed limit of " << CREDITS_MAX << std::endl;
 		return NULL;
 	}
 

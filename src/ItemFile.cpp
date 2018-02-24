@@ -51,7 +51,7 @@ std::shared_ptr<Item> ItemFile::GetItemByUserAndName(std::string userName, std::
     for (auto item : items) 
     {
 		// Perform a case insensitive check against item name to guarantee uniqueness
-        if (item->GetSellerName() == userName && String::Equals(item->GetName(), itemName, true))
+        if (String::Equals(item->GetSellerName(), userName, true) && String::Equals(item->GetName(), itemName, true))
         {
             result = item;
             break;

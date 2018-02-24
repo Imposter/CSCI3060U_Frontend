@@ -33,7 +33,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	// Check username length
 	if (userName.size() > USERNAME_LENGTH)
 	{
-		std::cerr << "ERROR: Invalid username (too long)" << std::endl;
+		std::cerr << "ERROR: Username too long" << std::endl;
 		return NULL;
 	}
 
@@ -41,7 +41,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	auto userAccount = userFile.GetUserByName(userName);
 	if (!userAccount)
 	{
-		std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+		std::cerr << "ERROR: User does not exist" << std::endl;
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (transaction->GetUserName() == userName)
 		{
-			std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+			std::cerr << "ERROR: User does not exist" << std::endl;
 			return NULL;
 		}
 	}

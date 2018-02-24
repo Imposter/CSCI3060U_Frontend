@@ -27,7 +27,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	// Check item name length
 	if (itemName.size() > ITEM_NAME_LENGTH)
 	{
-		std::cerr << "ERROR: Invalid item name (too long)" << std::endl;
+		std::cerr << "ERROR: Item name is too long" << std::endl;
 		return NULL;
 	}
 
@@ -35,7 +35,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	auto previousItem = itemFile.GetItemByUserAndName(user->GetName(), itemName);
 	if (previousItem)
 	{
-		std::cerr << "ERROR: Invalid item name (already exists)" << std::endl;
+		std::cerr << "ERROR: Item already exists" << std::endl;
 		return NULL;
 	}
 
@@ -48,7 +48,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 		auto transaction = PointerCast::Reinterpret<AdvertiseTransaction>(t);
 		if (transaction->GetSellerUserName() == user->GetName() && String::Equals(transaction->GetItemName(), itemName, true))
 		{
-			std::cerr << "ERROR: Invalid item name (already exists)" << std::endl;
+			std::cerr << "ERROR: Item already exists" << std::endl;
 			return NULL;
 		}
 	}
@@ -68,7 +68,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	auto numPrice = atof(itemPrice.c_str());
 	if (numPrice > ITEM_PRICE_MAX)
 	{
-		std::cerr << "ERROR: Invalid price (exceeded limit)" << std::endl;
+		std::cerr << "ERROR: Price exceeds limit of " << ITEM_PRICE_MAX << std::endl;
 		return NULL;
 	}
 
@@ -87,9 +87,11 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	auto numAuctionDays = atoi(itemAuctionDays.c_str());
 	if (numAuctionDays > ITEM_AUCTION_MAX)
 	{
-		std::cerr << "ERROR: Invalid amount of days to auction (exceeded limit)" << std::endl;
+		std::cerr << "ERROR: Amount of days to auction exceeds limit of " << ITEM_AUCTION_MAX << std::endl;
 		return NULL;
 	}
+
+	// TODO: Notify user that the item was advertised
 
 	// Create item transaction
 	return std::make_shared<AdvertiseTransaction>(itemName, user->GetName(), numAuctionDays, numPrice);

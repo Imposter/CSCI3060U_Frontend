@@ -37,7 +37,7 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 	auto userAccount = userFile.GetUserByName(userName);
 	if (!userAccount)
 	{
-		std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+		std::cerr << "ERROR: User does not exist" << std::endl;
 		return NULL;
 	}
 
@@ -47,7 +47,7 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (transaction->GetUserName() == userName)
 		{
-			std::cerr << "ERROR: Invalid username (does not exist)" << std::endl;
+			std::cerr << "ERROR: User does not exist" << std::endl;
 			return NULL;
 		}
 	}
