@@ -8,7 +8,7 @@ std::string String::PadLeft(std::string target, char character, int count)
 		return target;
 
 	std::string output;
-	
+
 	output.append(count - target.size(), character);
 	output.append(target);
 	
@@ -50,19 +50,20 @@ std::string String::TrimRight(std::string target)
 std::string String::Format(std::string format, ...)
 {
 	va_list arguments;
-	va_start(arguments, format);
 
+	va_start(arguments, format);
 	auto length = vsnprintf(NULL, 0, format.c_str(), arguments) + 1;
+	va_end(arguments);
 
 	std::string result;
 	result.resize(length);
 
-	vsnprintf(const_cast<char *>(result.c_str()), length, format.c_str(), arguments);
-
+	va_start(arguments, format);
+	length = vsnprintf(const_cast<char *>(result.c_str()), length, format.c_str(), arguments);
 	va_end(arguments);
 
-	// Remove null terminator
-	result.resize(length - 1);
+	// Resize to new length
+	result.resize(length);
 
 	return result;
 }
@@ -79,7 +80,7 @@ bool String::Equals(std::string str1, std::string str2, bool caseInsensitive)
 
 	auto size = str1.size() > str2.size() ? str2.size() : str1.size();
 	for (size_t i = 0; i < size; i++)
-		if (caseInsensitive && tolower(str1[i]) != tolower(str2[i]) || !caseInsensitive && str1[i] != str2[i])
+		if ((caseInsensitive && tolower(str1[i]) != tolower(str2[i])) || (!caseInsensitive && str1[i] != str2[i]))
 			return false;
 
 	return true;

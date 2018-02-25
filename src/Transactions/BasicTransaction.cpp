@@ -25,8 +25,13 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 	double userCredits;
 
 	stream >> type;
-	//stream.read(const_cast<char *>(userName.c_str()), USERNAME_LENGTH);
-	stream >> userName;// TODO/NOTE: This does not account for spaces in usernames
+	stream.ignore();
+
+	userName.resize(USERNAME_LENGTH);
+	stream.read(const_cast<char *>(userName.c_str()), USERNAME_LENGTH);
+	userName = String::TrimRight(userName);
+	stream.ignore();
+	
 	stream >> userType;
 	stream >> userCredits;
 
