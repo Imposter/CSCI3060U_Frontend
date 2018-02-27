@@ -1,4 +1,5 @@
 #include "ItemFile.hpp"
+#include "Config.hpp"
 #include "Utility/String.hpp"
 #include <sstream>
 
@@ -22,9 +23,24 @@ bool ItemFile::Open()
 		int daysToAuction;
 		double currentBid;
 
-		stream >> itemName;
-		stream >> sellerUserName;
-		stream >> buyerUserName;
+		// Read item name
+		itemName.resize(ITEM_NAME_LENGTH);
+		stream.read(const_cast<char *>(itemName.c_str()), ITEM_NAME_LENGTH);
+		itemName = String::TrimRight(itemName);
+		stream.ignore();
+
+		// Read seller name
+		sellerUserName.resize(USERNAME_LENGTH);
+		stream.read(const_cast<char *>(sellerUserName.c_str()), USERNAME_LENGTH);
+		sellerUserName = String::TrimRight(sellerUserName);
+		stream.ignore();
+
+		// Read buyer name
+		buyerUserName.resize(USERNAME_LENGTH);
+		stream.read(const_cast<char *>(buyerUserName.c_str()), USERNAME_LENGTH);
+		buyerUserName = String::TrimRight(buyerUserName);
+		stream.ignore();
+
 		stream >> daysToAuction;
 		stream >> currentBid;
 
