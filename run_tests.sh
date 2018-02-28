@@ -10,7 +10,9 @@ clear
 echo ==========================================================
 echo Running frontend tests
 cd tests
-for f in `find . -name "*.inp" -type f`; do
+
+# Find all files that end with .inp in any child directory
+for f in ./**/*.inp; do
     TEST_FILE="${f##*/}"
     TEST_NAME="${TEST_FILE%%.*}"
     TEST_PATH="${f%/*}/"
@@ -23,7 +25,7 @@ for f in `find . -name "*.inp" -type f`; do
     printf "\n"
 
     # Remove previous transaction test information to prevent appending and recreate the file
-    rm $TEST_PATH/$TEST_NAME.atf >/dev/null
+    rm $TEST_PATH/$TEST_NAME.atf >/dev/null 2>&1
     touch $TEST_PATH/$TEST_NAME.atf
 
     # Run program with redirected IO
