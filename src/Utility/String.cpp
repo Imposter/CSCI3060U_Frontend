@@ -78,7 +78,7 @@ bool String::Equals(std::string str1, std::string str2, bool caseInsensitive)
 	if (str1.size() != str2.size())
 		return false;
 
-	auto size = str1.size() > str2.size() ? str2.size() : str1.size();
+	const auto size = str1.size() > str2.size() ? str2.size() : str1.size();
 	for (size_t i = 0; i < size; i++)
 		if ((caseInsensitive && tolower(str1[i]) != tolower(str2[i])) || (!caseInsensitive && str1[i] != str2[i]))
 			return false;

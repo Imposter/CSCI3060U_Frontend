@@ -13,7 +13,7 @@ bool ItemFile::Open()
 
 	// Read and parse items
 	auto lines = ReadLines();
-	for (auto line : lines)
+	for (const auto &line : lines)
 	{
 		std::stringstream stream(line);
 
@@ -64,7 +64,7 @@ std::shared_ptr<Item> ItemFile::GetItemByUserAndName(std::string userName, std::
     std::shared_ptr<Item> result;
     
     // Find item by name
-    for (auto item : items) 
+    for (const auto &item : items) 
     {
 		// Perform a case insensitive check against item name to guarantee uniqueness
         if (String::Equals(item->GetSellerName(), userName, true) && String::Equals(item->GetName(), itemName, true))

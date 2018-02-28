@@ -15,7 +15,7 @@ std::string LogoutHandler::GetName()
 std::shared_ptr<Transaction> LogoutHandler::Handle(std::shared_ptr<User> &user)
 {
 	// Temporarily copy pointer to user
-	auto tempUser = user;
+	const auto tempUser = user;
 
 	// Set as not logged in
 	user = NULL;

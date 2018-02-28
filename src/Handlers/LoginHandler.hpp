@@ -10,8 +10,8 @@
  */
 class LoginHandler : public IHandler
 {
-	UserFile &userFile;
 	TransactionFile &transactionFile;
+	UserFile &userFile;
 
 public:
 	/**

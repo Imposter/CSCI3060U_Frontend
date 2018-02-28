@@ -38,7 +38,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if account exists
-	auto userAccount = userFile.GetUserByName(userName);
+	const auto userAccount = userFile.GetUserByName(userName);
 	if (!userAccount)
 	{
 		std::cerr << "ERROR: User does not exist" << std::endl;
@@ -46,9 +46,9 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the user is deleted the same day
-	for (auto t : transactionFile.GetTransactions(kTransactionType_Delete))
+	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Delete))
 	{
-		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
+		const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (transaction->GetUserName() == userName)
 		{
 			std::cerr << "ERROR: User does not exist" << std::endl;

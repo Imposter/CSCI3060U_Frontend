@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 		{
 			// Output all the available commands
 			std::cout << "Available commands:" << std::endl;
-			for (auto handler : handlers)
+			for (const auto &handler : handlers)
 				if (handler->IsAvailable(user))
 					std::cout << "> " << handler->GetName() << std::endl;
 			if (!user)
@@ -136,7 +136,7 @@ int main(int argc, char **argv)
 		}
 
 		auto commandFound = false;
-		for (auto handler : handlers) 
+		for (const auto &handler : handlers) 
 		{
 			if (input == handler->GetName())
 			{
@@ -151,7 +151,7 @@ int main(int argc, char **argv)
 				}
 
 				// Handle request
-				auto transaction = handler->Handle(user);
+				const auto transaction = handler->Handle(user);
 
 				// Check if a transaction was returned
 				if (transaction)

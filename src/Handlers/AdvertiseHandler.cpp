@@ -32,7 +32,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	}
 
 	// Check if item name is unique for seller
-	auto previousItem = itemFile.GetItemByUserAndName(user->GetName(), itemName);
+	const auto previousItem = itemFile.GetItemByUserAndName(user->GetName(), itemName);
 	if (previousItem)
 	{
 		std::cerr << "ERROR: Item already exists" << std::endl;
@@ -42,10 +42,10 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	// TODO: Document test to check for uniqueness in item name
 
 	// Check if a similar transaction has already been posted
-	for (auto t : transactionFile.GetTransactions(kTransactionType_Advertise))
+	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Advertise))
 	{
 		// Perform case insensitive comparison to guarantee uniqueness
-		auto transaction = PointerCast::Reinterpret<AdvertiseTransaction>(t);
+		const auto transaction = PointerCast::Reinterpret<AdvertiseTransaction>(t);
 		if (transaction->GetSellerUserName() == user->GetName() && String::Equals(transaction->GetItemName(), itemName, true))
 		{
 			std::cerr << "ERROR: Item already exists" << std::endl;
@@ -65,7 +65,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 		return NULL;
 	}
 
-	auto numPrice = atof(itemPrice.c_str());
+	auto numPrice = strtod(itemPrice.c_str(), NULL);
 	if (numPrice > ITEM_PRICE_MAX)
 	{
 		std::cerr << "ERROR: Price exceeds limit of " << ITEM_PRICE_MAX << std::endl;
@@ -84,14 +84,15 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 		return NULL;
 	}
 
-	auto numAuctionDays = atoi(itemAuctionDays.c_str());
+	auto numAuctionDays = strtol(itemAuctionDays.c_str(), NULL, 10);
 	if (numAuctionDays > ITEM_AUCTION_MAX)
 	{
 		std::cerr << "ERROR: Amount of days to auction exceeds limit of " << ITEM_AUCTION_MAX << std::endl;
 		return NULL;
 	}
 
-	// TODO: Notify user that the item was advertised
+	// Notify user that the item was advertised
+	std::cout << "Posted advertisement " << itemName << " for $" << String::Format("%.2f", numPrice) << " active for " << numAuctionDays << " days" << std::endl;
 
 	// Create item transaction
 	return std::make_shared<AdvertiseTransaction>(itemName, user->GetName(), numAuctionDays, numPrice);

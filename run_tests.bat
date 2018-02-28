@@ -23,8 +23,8 @@ for /r %%f in (*.inp) do (
     echo:
 
     :: Remove previous transaction test information to prevent appending and recreate the file
-    del /q !TEST_PATH!\\!TEST_NAME!.atf >NUL
-    copy /b NUL !TEST_PATH!\\!TEST_NAME!.atf >NUL
+    del /q !TEST_PATH!\\!TEST_NAME!.atf >NUL 2>&1
+    copy /b NUL !TEST_PATH!\\!TEST_NAME!.atf >NUL 2>&1
 
     :: Run program with redirected IO
     "..\\build\\frontend.exe" current_users.txt available_items.txt !TEST_PATH!\\!TEST_NAME!.atf <%%f >!TEST_PATH!\\!TEST_NAME!.out 2>&1

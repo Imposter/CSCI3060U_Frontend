@@ -6,7 +6,6 @@ project 'frontend'
 	kind 'ConsoleApp'
 	language 'C++'
 	cppdialect 'C++14'
-	toolset 'clang'
 	targetdir 'build/%{cfg.buildCfg}'
 	
 	files {

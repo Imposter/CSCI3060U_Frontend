@@ -32,7 +32,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if account exists in the user file
-	auto userAccount = userFile.GetUserByName(userName);
+	const auto userAccount = userFile.GetUserByName(userName);
 	if (userAccount)
 	{
 		std::cerr << "ERROR: Username is already in use" << std::endl;
@@ -40,10 +40,10 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the transaction to create a user is already pending
-	for (auto t : transactionFile.GetTransactions(kTransactionType_Create))
+	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Create))
 	{
 		// Perform case insensitive comparison to guarantee uniqueness
-		auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
+		const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (String::Equals(transaction->GetUserName(), userName, true))
 		{
 			std::cerr << "ERROR: Username is already in use" << std::endl;
@@ -76,7 +76,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 		return NULL;
 	}
 
-	auto numCredits = atof(credits.c_str());
+	auto numCredits = strtod(credits.c_str(), NULL);
 	if (numCredits > CREDITS_MAX)
 	{
 		std::cerr << "ERROR: Credits exceed limit of " << CREDITS_MAX << std::endl;

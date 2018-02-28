@@ -33,13 +33,13 @@ std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(Trans
 
 	// Read and return result
 	auto lines = ReadLines();
-	for (auto line : lines)
+	for (const auto &line : lines)
 	{
 		// Skip invalid lines
 		if (line.empty())
 			continue;
 
-		auto typeString = line.substr(0, 2);
+		const auto typeString = line.substr(0, 2);
 
 		if (typeString == GetTransactionTypeString(type))
 			result.push_back(serializer->Deserialize(line));

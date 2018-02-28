@@ -45,7 +45,7 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the seller is an existing user
-	auto sellerUser = userFile.GetUserByName(sellerName);
+	const auto sellerUser = userFile.GetUserByName(sellerName);
 	if (!sellerUser)
 	{
 		std::cerr << "ERROR: Cannot bid on this item" << std::endl;
@@ -71,28 +71,25 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 		return NULL;
 	}
 
-	auto numBid = atof(newBid.c_str());
+	const auto numBid = strtod(newBid.c_str(), NULL);
 	if (numBid > ITEM_PRICE_MAX)
 	{
 		std::cerr << "ERROR: Bid exceeds limit of " << ITEM_PRICE_MAX << std::endl;
 		return NULL;
 	}
 
-	// Check if bid restrictions apply
-	if (user->GetType() != kUserType_Admin)
+	// Check if new bid is greater than last bid
+	if (numBid <= item->GetCurrentBid())
 	{
-		if (numBid <= item->GetCurrentBid())
-		{
-			std::cerr << "ERROR: Invalid bid (must be greater than previous bid)" << std::endl;
-			return NULL;
-		}
+		std::cerr << "ERROR: Invalid bid (must be greater than previous bid)" << std::endl;
+		return NULL;
+	}
 
-		// Check if new bid exceeds previous bid by at least 5%
-		if (item->GetCurrentBid() / numBid >= 0.95)
-		{
-			std::cerr << "ERROR: Invalid bid (must be greater than previous bid by at least 5%)" << std::endl;
-			return NULL;
-		}
+	// Check if new bid exceeds previous bid by at least 5% if user is not an admin
+	if (user->GetType() != kUserType_Admin && item->GetCurrentBid() / numBid >= 0.95)
+	{
+		std::cerr << "ERROR: Invalid bid (must be greater than previous bid by at least 5%)" << std::endl;
+		return NULL;
 	}
 
 	// Check if the user can afford to make the bid
@@ -109,9 +106,8 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 	// Remove amount of credits from the user (they will be returned to the user on the next day)
 	user->SetCredits(user->GetCredits() - numBid);
 
-	// TODO: Notify user that the item was bid on
-
-	// TODO: Add tests for bid
+	// Notify user that the item was bid on
+	std::cout << "Bid on " << itemName << " by " << sellerName << " with $" << String::Format("%.2f", numBid) << std::endl;
 
 	// Create transaction
 	return std::make_shared<BidTransaction>(item->GetName(), item->GetSellerName(), item->GetBidderName(), item->GetCurrentBid());

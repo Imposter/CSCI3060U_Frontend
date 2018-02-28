@@ -12,7 +12,7 @@ bool UserFile::Open()
 
     // Read and parse users
 	auto lines = ReadLines();
-	for (auto line : lines)
+	for (const auto &line : lines)
 	{
 		std::stringstream stream(line); 
 		
@@ -44,7 +44,7 @@ std::shared_ptr<User> UserFile::GetUserByName(std::string userName)
     std::shared_ptr<User> result;
 
     // Find user by name
-    for (auto user : users) 
+    for (const auto &user : users) 
     {
 		// Perform a case insensitive comparison to guarantee uniqueness
         if (String::Equals(user->GetName(), userName, true))
