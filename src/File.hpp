@@ -9,8 +9,8 @@
 class File
 {
 protected:
-	std::string name;
-	std::fstream file;
+	std::string mName;
+	std::fstream mFile;
 
 public:
 	/**

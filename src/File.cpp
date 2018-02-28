@@ -2,7 +2,7 @@
 #include <string>
 
 File::File(std::string name)
-	: name(name) {}
+	: mName(name) {}
 
 File::~File()
 {
@@ -14,29 +14,29 @@ bool File::Open(bool append)
 	auto openMode = std::fstream::in | std::fstream::out;
 	if (append) openMode |= std::fstream::app;
 
-	file.open(name, openMode);
-	return file.is_open();
+	mFile.open(mName, openMode);
+	return mFile.is_open();
 }
 
 void File::Close()
 {
-	if (file.is_open())
+	if (mFile.is_open())
 	{
-		file.flush();
-		file.close();
+		mFile.flush();
+		mFile.close();
 	}
 }
 
 std::vector<std::string> File::ReadLines()
 {
 	std::vector<std::string> result;
-	if (!file.is_open())
+	if (!mFile.is_open())
 		return result;
 
-	while (!file.eof())
+	while (!mFile.eof())
 	{
 		std::string line;
-		getline(file, line);
+		getline(mFile, line);
 		result.push_back(line);
 	}
 
@@ -45,23 +45,23 @@ std::vector<std::string> File::ReadLines()
 
 void File::WriteLine(std::string line)
 {
-	file << line << std::endl;
+	mFile << line << std::endl;
 }
 
 void File::Rewind()
 {
-	if (file.is_open())
+	if (mFile.is_open())
 	{
-		file.clear();
-		file.seekg(0, std::ios::beg);
+		mFile.clear();
+		mFile.seekg(0, std::ios::beg);
 	}
 }
 
 void File::Forward()
 {
-	if (file.is_open())
+	if (mFile.is_open())
 	{
-		file.clear();
-		file.seekg(0, std::ios::end);
+		mFile.clear();
+		mFile.seekg(0, std::ios::end);
 	}
 }

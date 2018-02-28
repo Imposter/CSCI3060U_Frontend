@@ -1,17 +1,16 @@
 #include "AdvertiseTransaction.hpp"
 #include "../Config.hpp"
 #include "../Utility/String.hpp"
-#include <algorithm>
 #include <sstream>
 
 std::string AdvertiseTransaction::Serializer::Serialize(std::shared_ptr<AdvertiseTransaction> data)
 {
 	std::stringstream stream;
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
-	stream << String::PadRight(data->itemName, ' ', ITEM_NAME_LENGTH) << ' ';
-	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(std::to_string(data->daysToAuction), '0', 3) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->minBid), '0', ITEM_PRICE_LENGTH);
+	stream << String::PadRight(data->mItemName, ' ', ITEM_NAME_LENGTH) << ' ';
+	stream << String::PadRight(data->mSellerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadLeft(std::to_string(data->mDaysToAuction), '0', 3) << ' ';
+	stream << String::PadLeft(String::Format("%.2f", data->mMinBid), '0', ITEM_PRICE_LENGTH);
 
 	return stream.str();
 }
@@ -46,24 +45,24 @@ std::shared_ptr<AdvertiseTransaction> AdvertiseTransaction::Serializer::Deserial
 }
 
 AdvertiseTransaction::AdvertiseTransaction(const std::string &itemName, const std::string &sellerUserName, int daysToAuction, double minBid)
-	: Transaction(kTransactionType_Advertise), itemName(itemName), sellerUserName(sellerUserName), daysToAuction(daysToAuction), minBid(minBid) {}
+	: Transaction(kTransactionType_Advertise), mItemName(itemName), mSellerUserName(sellerUserName), mDaysToAuction(daysToAuction), mMinBid(minBid) {}
 
 const std::string &AdvertiseTransaction::GetItemName() const
 {
-	return itemName;
+	return mItemName;
 }
 
 const std::string &AdvertiseTransaction::GetSellerUserName() const
 {
-	return sellerUserName;
+	return mSellerUserName;
 }
 
 const int &AdvertiseTransaction::GetDaysToAuction() const
 {
-	return daysToAuction;
+	return mDaysToAuction;
 }
 
 const double &AdvertiseTransaction::GetMinimumBid() const
 {
-	return minBid;
+	return mMinBid;
 }

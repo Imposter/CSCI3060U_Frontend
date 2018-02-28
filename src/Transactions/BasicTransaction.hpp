@@ -9,9 +9,9 @@
 */
 class BasicTransaction : public Transaction
 {
-    std::string userName;
-    UserType userType;
-	double credits;
+    std::string mUserName;
+    UserType mUserType;
+	double mCredits;
 
 public:
 	/**

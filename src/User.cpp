@@ -1,24 +1,24 @@
 #include "User.hpp"
 
 User::User(std::string name, UserType type, double credits)
-	: name(name), type(type), credits(credits) {}
+	: mName(name), mType(type), mCredits(credits) {}
 
 const std::string &User::GetName() const
 {
-	return name;
+	return mName;
 }
 
 const UserType &User::GetType() const
 {
-	return type;
+	return mType;
 }
 
 const double &User::GetCredits() const
 {
-	return credits;
+	return mCredits;
 }
 
 void User::SetCredits(double credits)
 {
-	this->credits = credits;
+	this->mCredits = credits;
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 
 LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
-	: transactionFile(transactionFile), userFile(userFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile) {}
 
 TransactionType LoginHandler::GetType()
 {
@@ -38,7 +38,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if account exists
-	const auto userAccount = userFile.GetUserByName(userName);
+	const auto userAccount = mUserFile.GetUserByName(userName);
 	if (!userAccount)
 	{
 		std::cerr << "ERROR: User does not exist" << std::endl;
@@ -46,7 +46,7 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the user is deleted the same day
-	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Delete))
+	for (const auto &t : mTransactionFile.GetTransactions(kTransactionType_Delete))
 	{
 		const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (transaction->GetUserName() == userName)

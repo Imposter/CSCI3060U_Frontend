@@ -5,7 +5,7 @@
 #include <iostream>
 
 AdvertiseHandler::AdvertiseHandler(TransactionFile &transactionFile, ItemFile &itemFile)
-	: transactionFile(transactionFile), itemFile(itemFile) {}
+	: mTransactionFile(transactionFile), mItemFile(itemFile) {}
 
 TransactionType AdvertiseHandler::GetType()
 {
@@ -32,7 +32,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	}
 
 	// Check if item name is unique for seller
-	const auto previousItem = itemFile.GetItemByUserAndName(user->GetName(), itemName);
+	const auto previousItem = mItemFile.GetItemByUserAndName(user->GetName(), itemName);
 	if (previousItem)
 	{
 		std::cerr << "ERROR: Item already exists" << std::endl;
@@ -42,7 +42,7 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 	// TODO: Document test to check for uniqueness in item name
 
 	// Check if a similar transaction has already been posted
-	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Advertise))
+	for (const auto &t : mTransactionFile.GetTransactions(kTransactionType_Advertise))
 	{
 		// Perform case insensitive comparison to guarantee uniqueness
 		const auto transaction = PointerCast::Reinterpret<AdvertiseTransaction>(t);

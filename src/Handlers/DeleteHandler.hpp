@@ -9,8 +9,8 @@
  */
 class DeleteHandler : public IHandler
 {
-	TransactionFile &transactionFile;
-	UserFile &userFile;
+	TransactionFile &mTransactionFile;
+	UserFile &mUserFile;
 
 public:
 	/**

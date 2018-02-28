@@ -7,11 +7,11 @@
  */
 class Item
 {
-    std::string name;
-    std::string sellerUserName;
-    std::string bidderUserName;
-    int daysToAuction;
-    double currentBid;
+    std::string mName;
+    std::string mSellerUserName;
+    std::string mBidderUserName;
+    int mDaysToAuction;
+    double mCurrentBid;
 
 public:
 	/**

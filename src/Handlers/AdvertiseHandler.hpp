@@ -9,8 +9,8 @@
 */
 class AdvertiseHandler : public IHandler
 {
-	TransactionFile &transactionFile;
-	ItemFile &itemFile;
+	TransactionFile &mTransactionFile;
+	ItemFile &mItemFile;
 
 public:
 	/**

@@ -7,7 +7,7 @@
  */
 class Transaction
 {
-	TransactionType type;
+	TransactionType mType;
 
 public:
 	/**

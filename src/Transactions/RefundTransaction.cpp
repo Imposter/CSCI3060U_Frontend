@@ -1,16 +1,15 @@
 #include "RefundTransaction.hpp"
 #include "../Config.hpp"
 #include "../Utility/String.hpp"
-#include <algorithm>
 #include <sstream>
 
 std::string RefundTransaction::Serializer::Serialize(std::shared_ptr<RefundTransaction> data)
 {
 	std::stringstream stream;
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
-	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', CREDITS_LENGTH);
+	stream << String::PadRight(data->mBuyerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadRight(data->mSellerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadLeft(String::Format("%.2f", data->mCredits), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }
@@ -43,19 +42,19 @@ std::shared_ptr<RefundTransaction> RefundTransaction::Serializer::Deserialize(st
 }
 
 RefundTransaction::RefundTransaction(const std::string &buyerUserName, const std::string &sellerUserName, double credits)
-	: Transaction(kTransactionType_Refund), buyerUserName(buyerUserName), sellerUserName(sellerUserName), credits(credits) {}
+	: Transaction(kTransactionType_Refund), mBuyerUserName(buyerUserName), mSellerUserName(sellerUserName), mCredits(credits) {}
 
 const std::string &RefundTransaction::GetBuyerUserName() const
 {
-	return buyerUserName;
+	return mBuyerUserName;
 }
 
 const std::string &RefundTransaction::GetSellerUserName() const
 {
-	return sellerUserName;
+	return mSellerUserName;
 }
 
 const double &RefundTransaction::GetCredits() const
 {
-	return credits;
+	return mCredits;
 }

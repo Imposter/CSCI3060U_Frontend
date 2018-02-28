@@ -5,7 +5,7 @@
 #include <iostream>
 
 CreateHandler::CreateHandler(TransactionFile &transactionFile, UserFile &userFile)
-	: transactionFile(transactionFile), userFile(userFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile) {}
 
 TransactionType CreateHandler::GetType()
 {
@@ -32,7 +32,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if account exists in the user file
-	const auto userAccount = userFile.GetUserByName(userName);
+	const auto userAccount = mUserFile.GetUserByName(userName);
 	if (userAccount)
 	{
 		std::cerr << "ERROR: Username is already in use" << std::endl;
@@ -40,7 +40,7 @@ std::shared_ptr<Transaction> CreateHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the transaction to create a user is already pending
-	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Create))
+	for (const auto &t : mTransactionFile.GetTransactions(kTransactionType_Create))
 	{
 		// Perform case insensitive comparison to guarantee uniqueness
 		const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);

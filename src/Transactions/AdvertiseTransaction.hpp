@@ -9,10 +9,10 @@
 */
 class AdvertiseTransaction : public Transaction
 {
-	std::string itemName;
-	std::string sellerUserName;
-	int daysToAuction;
-	double minBid;
+	std::string mItemName;
+	std::string mSellerUserName;
+	int mDaysToAuction;
+	double mMinBid;
 
 public:
 	/**

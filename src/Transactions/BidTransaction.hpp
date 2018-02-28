@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Transaction.hpp"
-#include "../Config.hpp"
 #include "../UserType.hpp"
 #include "../Utility/ISerializer.hpp"
 
@@ -10,10 +9,10 @@
  */
 class BidTransaction : public Transaction
 {
-    std::string itemName;
-	std::string sellerUserName;
-	std::string buyerUserName;
-	double newBid;
+    std::string mItemName;
+	std::string mSellerUserName;
+	std::string mBuyerUserName;
+	double mNewBid;
 
 public:
 	/**

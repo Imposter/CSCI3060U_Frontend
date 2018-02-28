@@ -10,10 +10,10 @@ void TransactionFile::WriteTransaction(std::shared_ptr<Transaction> transaction)
 
 	// Get serializer for type
 	std::vector<std::shared_ptr<Transaction>> result;
-	if (serializers.find(transaction->GetType()) == serializers.end())
+	if (mSerializers.find(transaction->GetType()) == mSerializers.end())
 		return;
 
-	auto serializer = serializers[transaction->GetType()];
+	auto serializer = mSerializers[transaction->GetType()];
 
 	// Serialize and write transaction string
 	WriteLine(serializer->Serialize(transaction));
@@ -23,10 +23,10 @@ std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(Trans
 {
 	// Get serializer for type
 	std::vector<std::shared_ptr<Transaction>> result;
-	if (serializers.find(type) == serializers.end())
+	if (mSerializers.find(type) == mSerializers.end())
 		return result;
 
-	auto serializer = serializers[type];
+	auto serializer = mSerializers[type];
 
 	// Rewind file
 	Rewind();

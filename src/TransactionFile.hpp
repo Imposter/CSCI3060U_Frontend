@@ -12,7 +12,7 @@
 */
 class TransactionFile : public File 
 {
-	std::map<TransactionType, std::shared_ptr<ISerializer<Transaction>>> serializers;
+	std::map<TransactionType, std::shared_ptr<ISerializer<Transaction>>> mSerializers;
 
 public:
 	/**
@@ -29,7 +29,7 @@ public:
 	template<typename TTransaction = Transaction>
 	void AddSerializer(TransactionType type, std::shared_ptr<ISerializer<TTransaction>> serializer)
 	{
-		serializers.insert({ type, PointerCast::Reinterpret<ISerializer<Transaction>>(serializer) });
+		mSerializers.insert({ type, PointerCast::Reinterpret<ISerializer<Transaction>>(serializer) });
 	}
 
 	/**

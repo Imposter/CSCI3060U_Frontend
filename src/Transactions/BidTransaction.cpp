@@ -1,17 +1,16 @@
 #include "BidTransaction.hpp"
 #include "../Config.hpp"
 #include "../Utility/String.hpp"
-#include <algorithm>
 #include <sstream>
 
 std::string BidTransaction::Serializer::Serialize(std::shared_ptr<BidTransaction> data)
 {
 	std::stringstream stream;
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
-	stream << String::PadRight(data->itemName, ' ', ITEM_NAME_LENGTH) << ' ';
-	stream << String::PadRight(data->sellerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadRight(data->buyerUserName, ' ', USERNAME_LENGTH) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->newBid), '0', ITEM_PRICE_LENGTH);
+	stream << String::PadRight(data->mItemName, ' ', ITEM_NAME_LENGTH) << ' ';
+	stream << String::PadRight(data->mSellerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadRight(data->mBuyerUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << String::PadLeft(String::Format("%.2f", data->mNewBid), '0', ITEM_PRICE_LENGTH);
 
 	return stream.str();
 }
@@ -50,24 +49,24 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 }
 
 BidTransaction::BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, double newBid)
-	: Transaction(kTransactionType_Bid), itemName(itemName), sellerUserName(sellerUserName), buyerUserName(buyerUserName), newBid(newBid) {}
+	: Transaction(kTransactionType_Bid), mItemName(itemName), mSellerUserName(sellerUserName), mBuyerUserName(buyerUserName), mNewBid(newBid) {}
 
 const std::string &BidTransaction::GetItemName() const
 {
-	return itemName;
+	return mItemName;
 }
 
 const std::string &BidTransaction::GetSellerUserName() const
 {
-	return sellerUserName;
+	return mSellerUserName;
 }
 
 const std::string &BidTransaction::GetBuyerUserName() const
 {
-	return buyerUserName;
+	return mBuyerUserName;
 }
 
 const double &BidTransaction::GetNewBid() const
 {
-	return newBid;
+	return mNewBid;
 }

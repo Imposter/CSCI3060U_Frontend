@@ -5,7 +5,7 @@
 #include <iostream>
 
 BidHandler::BidHandler(TransactionFile &transactionFile, UserFile &userFile, ItemFile &itemFile)
-	: transactionFile(transactionFile), userFile(userFile), itemFile(itemFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile), mItemFile(itemFile) {}
 
 TransactionType BidHandler::GetType()
 {
@@ -37,7 +37,7 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 	getline(std::cin, sellerName);
 
 	// Check if the item name refers to an existing item
-	auto item = itemFile.GetItemByUserAndName(sellerName, itemName);
+	auto item = mItemFile.GetItemByUserAndName(sellerName, itemName);
 	if (!item)
 	{
 		std::cerr << "ERROR: Item does not exist" << std::endl;
@@ -45,7 +45,7 @@ std::shared_ptr<Transaction> BidHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the seller is an existing user
-	const auto sellerUser = userFile.GetUserByName(sellerName);
+	const auto sellerUser = mUserFile.GetUserByName(sellerName);
 	if (!sellerUser)
 	{
 		std::cerr << "ERROR: Cannot bid on this item" << std::endl;

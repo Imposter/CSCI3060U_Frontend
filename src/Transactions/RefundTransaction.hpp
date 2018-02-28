@@ -9,9 +9,9 @@
  */
 class RefundTransaction : public Transaction
 {
-	std::string buyerUserName;
-	std::string sellerUserName;
-	double credits;
+	std::string mBuyerUserName;
+	std::string mSellerUserName;
+	double mCredits;
 
 public:
 	/**

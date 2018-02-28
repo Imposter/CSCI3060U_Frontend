@@ -1,16 +1,15 @@
 #include "BasicTransaction.hpp"
 #include "../Config.hpp"
 #include "../Utility/String.hpp"
-#include <algorithm>
 #include <sstream>
 
 std::string BasicTransaction::Serializer::Serialize(std::shared_ptr<BasicTransaction> data)
 {
 	std::stringstream stream;
 	stream << GetTransactionTypeString(data->GetType()) << ' ';
-	stream << String::PadRight(data->userName, ' ', USERNAME_LENGTH) << ' ';
-	stream << GetUserTypeString(data->userType) << ' ';
-	stream << String::PadLeft(String::Format("%.2f", data->credits), '0', CREDITS_LENGTH);
+	stream << String::PadRight(data->mUserName, ' ', USERNAME_LENGTH) << ' ';
+	stream << GetUserTypeString(data->mUserType) << ' ';
+	stream << String::PadLeft(String::Format("%.2f", data->mCredits), '0', CREDITS_LENGTH);
 
 	return stream.str();
 }
@@ -39,19 +38,19 @@ std::shared_ptr<BasicTransaction> BasicTransaction::Serializer::Deserialize(std:
 }
 
 BasicTransaction::BasicTransaction(TransactionType type, const std::string &userName, UserType userType, double credits)
-	: Transaction(type), userName(userName), userType(userType), credits(credits) {}
+	: Transaction(type), mUserName(userName), mUserType(userType), mCredits(credits) {}
 
 const std::string &BasicTransaction::GetUserName() const
 {
-	return userName;
+	return mUserName;
 }
 
 const UserType &BasicTransaction::GetUserType() const
 {
-	return userType;
+	return mUserType;
 }
 
 const double &BasicTransaction::GetCredits() const
 {
-	return credits;
+	return mCredits;
 }

@@ -10,7 +10,7 @@
  */
 class ItemFile : public File 
 {
-    std::vector<std::shared_ptr<Item>> items;
+    std::vector<std::shared_ptr<Item>> mItems;
 
 public:
 	/**

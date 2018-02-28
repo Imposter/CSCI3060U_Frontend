@@ -10,9 +10,9 @@
  */
 class BidHandler : public IHandler
 {
-    TransactionFile &transactionFile;
-    UserFile &userFile;    
-	ItemFile &itemFile;
+    TransactionFile &mTransactionFile;
+    UserFile &mUserFile;    
+	ItemFile &mItemFile;
 
 public:
 	/**

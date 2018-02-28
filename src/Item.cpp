@@ -1,39 +1,39 @@
 #include "Item.hpp"
 
 Item::Item(std::string name, std::string seller, std::string bidder, int daysToAuction, double currentBid)
-    : name(name), sellerUserName(seller), bidderUserName(bidder), daysToAuction(daysToAuction), currentBid(currentBid) {}
+    : mName(name), mSellerUserName(seller), mBidderUserName(bidder), mDaysToAuction(daysToAuction), mCurrentBid(currentBid) {}
 
 const std::string &Item::GetName() const
 {
-    return name;
+    return mName;
 }
 
 const std::string &Item::GetSellerName() const
 {
-    return sellerUserName;
+    return mSellerUserName;
 }
 
 const std::string &Item::GetBidderName() const
 {
-    return bidderUserName;
+    return mBidderUserName;
 }
 
 const int &Item::GetDaysToAuction() const
 {
-    return daysToAuction;
+    return mDaysToAuction;
 }
 
 const double &Item::GetCurrentBid() const
 {
-    return currentBid;
+    return mCurrentBid;
 }
 
 void Item::SetBidderName(std::string bidder)
 {
-    bidderUserName = bidder;
+    mBidderUserName = bidder;
 }
 
 void Item::SetBid(double bid)
 {
-    currentBid = bid;
+    mCurrentBid = bid;
 }

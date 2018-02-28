@@ -48,7 +48,7 @@ bool ItemFile::Open()
 		if (itemName == "END")
 			break;
 
-		items.push_back(std::make_shared<Item>(itemName, sellerUserName, buyerUserName, daysToAuction, currentBid));
+		mItems.push_back(std::make_shared<Item>(itemName, sellerUserName, buyerUserName, daysToAuction, currentBid));
 	}
     
     return true;
@@ -56,7 +56,7 @@ bool ItemFile::Open()
 
 std::vector<std::shared_ptr<Item>> &ItemFile::GetItems()
 {
-	return items;
+	return mItems;
 }
 
 std::shared_ptr<Item> ItemFile::GetItemByUserAndName(std::string userName, std::string itemName)
@@ -64,7 +64,7 @@ std::shared_ptr<Item> ItemFile::GetItemByUserAndName(std::string userName, std::
     std::shared_ptr<Item> result;
     
     // Find item by name
-    for (const auto &item : items) 
+    for (const auto &item : mItems) 
     {
 		// Perform a case insensitive check against item name to guarantee uniqueness
         if (String::Equals(item->GetSellerName(), userName, true) && String::Equals(item->GetName(), itemName, true))

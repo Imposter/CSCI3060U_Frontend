@@ -6,7 +6,7 @@
 #include <algorithm>
 
 DeleteHandler::DeleteHandler(TransactionFile &transactionFile, UserFile &userFile)
-	: transactionFile(transactionFile), userFile(userFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile) {}
 
 TransactionType DeleteHandler::GetType()
 {
@@ -33,7 +33,7 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if account exists in the user file
-	const auto userAccount = userFile.GetUserByName(userName);
+	const auto userAccount = mUserFile.GetUserByName(userName);
 	if (!userAccount)
 	{
 		std::cerr << "ERROR: User does not exist" << std::endl;
@@ -41,7 +41,7 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Check if the account is already deleted
-	for (const auto &t : transactionFile.GetTransactions(kTransactionType_Delete))
+	for (const auto &t : mTransactionFile.GetTransactions(kTransactionType_Delete))
 	{
 		const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
 		if (transaction->GetUserName() == userName)
@@ -52,7 +52,7 @@ std::shared_ptr<Transaction> DeleteHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	// Remove user from users file
-	auto users = userFile.GetUsers();
+	auto users = mUserFile.GetUsers();
 	users.erase(remove(users.begin(), users.end(), userAccount), users.end());
 
 	// Prompt success

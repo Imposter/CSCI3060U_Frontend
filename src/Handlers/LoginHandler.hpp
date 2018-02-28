@@ -3,15 +3,14 @@
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
 #include "../UserFile.hpp"
-#include "../TransactionFile.hpp"
 
 /**
  * \brief Handles console input from user for the login command
  */
 class LoginHandler : public IHandler
 {
-	TransactionFile &transactionFile;
-	UserFile &userFile;
+	TransactionFile &mTransactionFile;
+	UserFile &mUserFile;
 
 public:
 	/**
