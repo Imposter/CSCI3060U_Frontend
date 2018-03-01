@@ -1,4 +1,8 @@
-# CSCI3060U Project
+# CSCI3060U Project - Frontend
+
+## Introduction
+
+The Front End reads in a file of items available for auction and a file containing information regarding current user accounts in the system, it processes a stream of item bidding and advertising transactions one at a time, and it writes out a file of item bidding and advertising transactions at the end of the session.
 
 ## Compiling
 
@@ -39,6 +43,11 @@ When using premake5 with gmake, specify a compiler of your choice (`gcc` or `cla
 #### Running tests on Windows
 - Open a command prompt in project root
 - Run `./run_tests.bat` to run all the tests
+
+## Running Frontend
+- Create a `data` folder residing in the same directory as the `frontend` executable
+- Create a `current_users.txt` file within the `data` folder
+- Create a `available_items.txt` file within the `data` folder
 
 ## Authors
 - Eyaz Rehman ([http://github.com/Imposter](GitHub))
