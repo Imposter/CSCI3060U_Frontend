@@ -50,5 +50,5 @@ When using premake5 with gmake, specify a compiler of your choice (`gcc` or `cla
 - Create a `available_items.txt` file within the `data` folder
 
 ## Authors
-- Eyaz Rehman ([http://github.com/Imposter](GitHub))
-- Spencer Bryson ([http://github.com/SpencerCBryson](GitHub))
+- Eyaz Rehman ([GitHub](http://github.com/Imposter))
+- Spencer Bryson ([GitHub](http://github.com/SpencerCBryson))
