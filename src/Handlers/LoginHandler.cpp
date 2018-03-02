@@ -56,6 +56,8 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 		}
 	}
 
+	// TODO: Get latest update on the amount of credits for a user
+
 	// Welcome user differently if they are privileged
 	if (userAccount->GetType() == kUserType_Admin)
 		std::cout << "Privileged login accepted" << std::endl;

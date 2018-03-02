@@ -9,6 +9,9 @@
 // Maximum amount of credits
 #define CREDITS_MAX 999999.99
 
+// Maximum credits allowed to be added
+#define CREDITS_SESSION_MAX 1000.00
+
 // Maximum amount of characters in a credit string
 #define CREDITS_LENGTH 9
 
@@ -20,6 +23,3 @@
 
 // Maximum days to auction
 #define ITEM_AUCTION_MAX 100
-
-// Maximum credits allowed to be added
-#define CREDITS_ADDCREDIT_MAX 1000.00

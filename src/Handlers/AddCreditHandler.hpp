@@ -3,7 +3,6 @@
 #include "IHandler.hpp"
 #include "../TransactionFile.hpp"
 #include "../UserFile.hpp"
-#include "../ItemFile.hpp"
 
 /**
 * \brief Handles console input from user for the add credit command
@@ -18,7 +17,6 @@ public:
 	* \brief Initializes add credit handler with transactions, user account and item file
 	* \param transactionFile Daily transactions file
 	* \param userFile User accounts file
-	* \param itemFile Available items file
 	*/
 	AddCreditHandler(TransactionFile &transactionFile, UserFile &userFile);
 
