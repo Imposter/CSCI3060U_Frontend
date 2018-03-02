@@ -22,15 +22,19 @@ std::shared_ptr<Transaction> AddCreditHandler::Handle(std::shared_ptr<User> &use
 {
 	// Get username
 	std::string userName;
-	if(user->GetType() == kUserType_Admin) {
+	if (user->GetType() == kUserType_Admin)
+	{
 		std::cout << "Enter username: ";
 		getline(std::cin, userName);
-	} else {
+	}
+	else
+	{
 		userName = user->GetName();
 	}
-	
+
 	// Check if account exists in the user file
-	if (!mUserFile.GetUserByName(userName))
+	auto userAccount = mUserFile.GetUserByName(userName);
+	if (!userAccount)
 	{
 		std::cerr << "ERROR: User does not exist" << std::endl;
 		return NULL;
@@ -48,25 +52,30 @@ std::shared_ptr<Transaction> AddCreditHandler::Handle(std::shared_ptr<User> &use
 		return NULL;
 	}
 
-	// Check if it exceeds max credits in the current transaction
-	// Admins can override this limit
+	// Check if it exceeds max credits in the current transaction, only if the user is not an admin
 	auto numCredits = strtod(credits.c_str(), NULL);
-	if ((numCredits > CREDITS_ADDCREDIT_MAX) && (user->GetType() != kUserType_Admin))
+	if (numCredits > CREDITS_SESSION_MAX && user->GetType() != kUserType_Admin)
 	{
-		std::cerr << "ERROR: Credits exceed limit of " << CREDITS_ADDCREDIT_MAX << std::endl;
+		std::cerr << "ERROR: Credits exceed limit of " << CREDITS_SESSION_MAX << " per day" << std::endl;
 		return NULL;
 	}
 
-	//TODO: ???
+	// TODO: Implement session-wide limit check
 
-	// Check if the credit addition would overflow max balance
-	auto newCredits = mUserFile.GetUserByName(userName)->GetCredits() + numCredits;
-	if(newCredits > CREDITS_MAX) {
-		std::cout << "ERROR: User credits would exceed limit of " << CREDITS_MAX << std::endl;
+	// Check if the credit addition would exceed max balance
+	auto newCredits = userAccount->GetCredits() + numCredits;
+	if (newCredits > CREDITS_MAX)
+	{
+		std::cout << "ERROR: Credits exceed limit of " << CREDITS_MAX << std::endl;
 		return NULL;
 	}
 
-	return std::make_shared<AddCreditTransaction>(userName, mUserFile.GetUserByName(userName)->GetType(), newCredits);
+	// Update user's credits
+	userAccount->SetCredits(newCredits);
+
+	// TODO: Prompt success
+
+	return std::make_shared<AddCreditTransaction>(userAccount->GetName(), userAccount->GetType(), newCredits);
 }
 
 bool AddCreditHandler::IsAvailable(std::shared_ptr<User> &user)

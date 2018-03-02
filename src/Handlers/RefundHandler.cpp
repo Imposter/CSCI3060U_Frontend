@@ -62,7 +62,8 @@ std::shared_ptr<Transaction> RefundHandler::Handle(std::shared_ptr<User> &user)
 		return NULL;
 	}
 
-	std::cout << sellerName << " refunded " << buyerName << " " << numCredits;
+	// Prompt success
+	std::cout << sellerName << " refunded " << buyerName << " $" << String::Format("%.2f", numCredits);
 
 	return std::make_shared<RefundTransaction>(buyerName, sellerName, numCredits);
 }
