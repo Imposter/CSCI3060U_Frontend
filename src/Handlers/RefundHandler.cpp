@@ -56,7 +56,7 @@ std::shared_ptr<Transaction> RefundHandler::Handle(std::shared_ptr<User> &user)
 	}
 
 	auto numCredits = strtod(credits.c_str(), NULL);
-	if (numCredits > CREDITS_MAX)
+	if (numCredits > ITEM_PRICE_MAX)
 	{
 		std::cerr << "ERROR: Credits exceed limit of " << CREDITS_MAX << std::endl;
 		return NULL;
