@@ -3,6 +3,9 @@
 :: Evaluate local variables on execution
 setlocal EnableDelayedExpansion
 
+:: Global variables
+set RETURN_CODE=0
+
 :: Clear screen
 cls
 
@@ -32,6 +35,7 @@ for /r %%f in (*.inp) do (
         :: An error occurred while running the frontend, stop all tests and let the user know
         echo Frontend exitted unexpectedly, check !TEST_PATH!\\!TEST_NAME!.out for more information...
         echo:
+        set RETURN_CODE=1
         goto end
     )
 
@@ -41,6 +45,7 @@ for /r %%f in (*.inp) do (
         :: A test failed, stop all tests and let the user know
         echo Test !TEST_NAME! failed
         echo:
+        set RETURN_CODE=1
         goto end
     ) else (
         echo Test !TEST_NAME! succeeded!
@@ -49,6 +54,7 @@ for /r %%f in (*.inp) do (
 )
 
 echo All tests completed successfully!
+set RETURN_CODE=0
 
 :end
     :: Return to project root folder
@@ -56,3 +62,6 @@ echo All tests completed successfully!
 
     :: Restore local variable evaluation
     endlocal
+
+    :: Exit with specified code
+    exit /b %RETURN_CODE%
