@@ -11,6 +11,7 @@ class User
 	std::string mName;
 	UserType mType;
 	double mCredits;
+	double mCreditsAdded; // Session-wide limit
 
 public:
 	/**
@@ -44,4 +45,16 @@ public:
      * \param credits Amount of credits
      */
 	void SetCredits(double credits);
+
+	/**
+	 * \brief Returns the amount of credits the user added throughout the session
+	 * \return Amount of credits added throughout the session
+	 */
+	const double &GetAddedCredits() const;
+
+	/**
+	 * \brief Adds credits to the user and increases session counter
+	 * \param credits Amount of credits
+	 */
+	void AddCredits(double credits);
 };

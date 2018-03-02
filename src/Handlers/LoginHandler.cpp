@@ -1,6 +1,7 @@
 #include "LoginHandler.hpp"
 #include "../Config.hpp"
 #include "../Transactions/LoginTransaction.hpp"
+#include "../Transactions/RefundTransaction.hpp"
 #include <iostream>
 
 LoginHandler::LoginHandler(TransactionFile &transactionFile, UserFile &userFile)
@@ -56,7 +57,30 @@ std::shared_ptr<Transaction> LoginHandler::Handle(std::shared_ptr<User> &user)
 		}
 	}
 
-	// TODO: Get latest update on the amount of credits for a user
+	// Get latest update on the amount of credits for a user
+	auto credits = userAccount->GetCredits();
+	for (const auto &t : mTransactionFile.GetTransactions({ kTransactionType_Logout, kTransactionType_AddCredit, kTransactionType_Refund }))
+	{
+		if (t->GetType() != kTransactionType_Refund)
+		{
+			// Cast to basic transaction
+			const auto transaction = PointerCast::Reinterpret<BasicTransaction>(t);
+			if (transaction->GetUserName() == userAccount->GetName())
+				credits = transaction->GetCredits();
+		} 
+		else
+		{
+			// Cast to refund transaction
+			const auto transaction = PointerCast::Reinterpret<RefundTransaction>(t);
+			if (transaction->GetBuyerUserName() == userAccount->GetName())
+				credits += transaction->GetCredits();
+			else if (transaction->GetSellerUserName() == userAccount->GetName())
+				credits -= transaction->GetCredits();
+		}
+	}
+
+	// Store the latest credits
+	userAccount->SetCredits(credits);
 
 	// Welcome user differently if they are privileged
 	if (userAccount->GetType() == kUserType_Admin)

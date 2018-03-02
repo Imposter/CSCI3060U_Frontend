@@ -39,8 +39,6 @@ std::shared_ptr<Transaction> AdvertiseHandler::Handle(std::shared_ptr<User> &use
 		return NULL;
 	}
 
-	// TODO: Document test to check for uniqueness in item name
-
 	// Check if a similar transaction has already been posted
 	for (const auto &t : mTransactionFile.GetTransactions(kTransactionType_Advertise))
 	{

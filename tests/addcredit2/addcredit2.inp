@@ -1,6 +1,8 @@
 login
-buyuser
+fulluser
 addcredit
-1000.01
+999.99
+addcredit
+100.00
 logout
 exit
