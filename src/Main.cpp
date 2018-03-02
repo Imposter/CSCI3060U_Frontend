@@ -14,6 +14,8 @@
 #include "Handlers/DeleteHandler.hpp"
 #include "Handlers/AdvertiseHandler.hpp"
 #include "Handlers/BidHandler.hpp"
+#include "Handlers/RefundHandler.hpp"
+#include "Handlers/AddCreditHandler.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -94,6 +96,8 @@ int main(int argc, char **argv)
 		std::make_shared<DeleteHandler>(transactionFile, userFile),
 		std::make_shared<AdvertiseHandler>(transactionFile, itemFile),
 		std::make_shared<BidHandler>(transactionFile, userFile, itemFile),
+		std::make_shared<RefundHandler>(transactionFile, userFile),
+		std::make_shared<AddCreditHandler>(transactionFile, userFile)
 	};
 
 	// Pointer for current user

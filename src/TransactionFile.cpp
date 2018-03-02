@@ -47,3 +47,40 @@ std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(Trans
 
 	return result;
 }
+
+std::vector<std::shared_ptr<Transaction>> TransactionFile::GetTransactions(std::vector<TransactionType> types)
+{
+	// Create result vector
+	std::vector<std::shared_ptr<Transaction>> result;
+
+	// Rewind file
+	Rewind();
+
+	// Read and return result
+	auto lines = ReadLines();
+	for (const auto &line : lines)
+	{
+		// Skip invalid lines
+		if (line.empty())
+			continue;
+
+		const auto typeString = line.substr(0, 2);
+
+		// Check if we're trying to get transactions of this type
+		for (auto type : types)
+		{
+			if (typeString == GetTransactionTypeString(type))
+			{
+				// Get serializer for this type and deserialize
+				if (mSerializers.find(type) == mSerializers.end())
+					return result;
+
+				auto serializer = mSerializers[type];
+				result.push_back(serializer->Deserialize(line));
+				break;
+			}
+		}
+	}
+
+	return result;
+}

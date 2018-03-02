@@ -38,11 +38,17 @@ public:
 	 */
 	void WriteTransaction(std::shared_ptr<Transaction> transaction);
 
-
 	/**
 	* \brief Returns all of the transactions made of a certain type
 	* \param type Transaction type to get transaction for
 	* \return All transactions of the specified type
 	*/
 	std::vector<std::shared_ptr<Transaction>> GetTransactions(TransactionType type);
+
+	/**
+	* \brief Returns all of the transactions made of the specified types
+	* \param types Transaction typse to get transactions for
+	* \return All transactions of the specified type
+	*/
+	std::vector<std::shared_ptr<Transaction>> GetTransactions(std::vector<TransactionType> types);
 };

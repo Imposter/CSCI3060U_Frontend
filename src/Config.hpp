@@ -20,3 +20,6 @@
 
 // Maximum days to auction
 #define ITEM_AUCTION_MAX 100
+
+// Maximum credits allowed to be added
+#define CREDITS_ADDCREDIT_MAX 1000.00

@@ -11,8 +11,7 @@
 class AddCreditHandler : public IHandler
 {
     TransactionFile &mTransactionFile;
-    UserFile &mUserFile;    
-	ItemFile &mItemFile;
+    UserFile &mUserFile;
 
 public:
 	/**
@@ -21,7 +20,7 @@ public:
 	* \param userFile User accounts file
 	* \param itemFile Available items file
 	*/
-	AddCreditHandler(TransactionFile &transactionFile, UserFile &userFile, ItemFile &itemFile);
+	AddCreditHandler(TransactionFile &transactionFile, UserFile &userFile);
 
 	/**
 	* \brief Returns add credit transaction type
