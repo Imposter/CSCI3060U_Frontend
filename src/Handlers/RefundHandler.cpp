@@ -50,7 +50,7 @@ std::shared_ptr<Transaction> RefundHandler::Handle(std::shared_ptr<User> &user)
 	getline(std::cin, sellerName);
 
 	// Check if seller account exists in the user file
-	auto sellerAccount = mUserFile.GetUserByName(buyerName);
+	auto sellerAccount = mUserFile.GetUserByName(sellerName);
 	if (!sellerAccount)
 	{
 		std::cerr << "ERROR: Seller user does not exist" << std::endl;
