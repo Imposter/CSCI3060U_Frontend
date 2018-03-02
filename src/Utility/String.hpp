@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <stdarg.h>
 
 /**
  * \brief String utility for STL string manipulation

@@ -1,7 +1,7 @@
 #include "RefundHandler.hpp"
 
 RefundHandler::RefundHandler(TransactionFile &transactionFile, UserFile &userFile)
-	: transactionFile(transactionFile), userFile(userFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile) {}
 
 TransactionType RefundHandler::GetType()
 {

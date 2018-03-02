@@ -1,5 +1,6 @@
 #include "String.hpp"
 #include <algorithm>
+#include <stdarg.h>
 #include <cctype>
 
 std::string String::PadLeft(std::string target, char character, int count)

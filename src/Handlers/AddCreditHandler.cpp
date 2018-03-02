@@ -1,7 +1,7 @@
 #include "AddCreditHandler.hpp"
 
 AddCreditHandler::AddCreditHandler(TransactionFile &transactionFile, UserFile &userFile, ItemFile &itemFile)
-	: transactionFile(transactionFile), userFile(userFile), itemFile(itemFile) {}
+	: mTransactionFile(transactionFile), mUserFile(userFile), mItemFile(itemFile) {}
 
 TransactionType AddCreditHandler::GetType()
 {
