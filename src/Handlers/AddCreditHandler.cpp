@@ -63,6 +63,7 @@ std::shared_ptr<Transaction> AddCreditHandler::Handle(std::shared_ptr<User> &use
 	auto newCredits = mUserFile.GetUserByName(userName)->GetCredits() + numCredits;
 	if(newCredits > CREDITS_MAX) {
 		std::cout << "ERROR: User credits would exceed limit of " << CREDITS_MAX << std::endl;
+		return NULL;
 	}
 
 	return std::make_shared<AddCreditTransaction>(userName, mUserFile.GetUserByName(userName)->GetType(), newCredits);
