@@ -3,6 +3,9 @@
 # Build results
 build/
 
+# Documentation results
+docs/
+
 # Test results
 tests/**/*.out
 tests/**/*.atf
