@@ -1,6 +1,6 @@
 Auction> Enter your username: Privileged login accepted
 Welcome, admin
-Auction> Enter buyer name: Enter seller name: Enter credits to return: ERROR: Credits exceed limit of 999.99
+Auction> Enter buyer name: Enter seller name: Enter credits to return: ERROR: Seller cannot afford to refund 100 credits
 Auction> Session terminated
 Goodbye admin
 Auction> 

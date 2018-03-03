@@ -90,7 +90,7 @@ std::shared_ptr<Transaction> RefundHandler::Handle(std::shared_ptr<User> &user)
 	// Check if the seller can afford to refund
 	if (sellerAccount->GetCredits() - numCredits < 0)
 	{
-		std::cerr << "ERROR: Seller cannot afford to refund " << numCredits << "credits" << std::endl;
+		std::cerr << "ERROR: Seller cannot afford to refund " << numCredits << " credits" << std::endl;
 		return NULL;
 	}
 

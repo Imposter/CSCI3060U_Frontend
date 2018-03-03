@@ -3,4 +3,5 @@ fulluser        FS 000000.00
 selluser        SS 009999.99
 buyuser         BS 998999.99
 deleteuser      BS 000000.00
+badseller       BS 000030.00
 END
