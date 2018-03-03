@@ -7,7 +7,7 @@ build/
 docs/
 
 # Test results
-tests/**/*.out
+tests/**/*.aout
 tests/**/*.atf
 
 # User-specific files
