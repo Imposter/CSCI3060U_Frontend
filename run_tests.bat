@@ -30,16 +30,16 @@ for /r %%f in (*.inp) do (
     copy /b NUL !TEST_PATH!\\!TEST_NAME!.atf >NUL 2>&1
 
     :: Run program with redirected IO
-    "..\\build\\frontend.exe" current_users.txt available_items.txt !TEST_PATH!\\!TEST_NAME!.atf <%%f >!TEST_PATH!\\!TEST_NAME!.out 2>&1
+    "..\\build\\frontend.exe" current_users.txt available_items.txt !TEST_PATH!\\!TEST_NAME!.atf <%%f >!TEST_PATH!\\!TEST_NAME!.aout 2>&1
     if errorlevel 1 (
         :: An error occurred while running the frontend, stop all tests and let the user know
-        echo Frontend exitted unexpectedly, check !TEST_PATH!\\!TEST_NAME!.out for more information...
+        echo Frontend exitted unexpectedly, check !TEST_PATH!\\!TEST_NAME!.aout for more information...
         echo:
         set RETURN_CODE=1
         goto end
     )
 
-    :: Check if the test failed
+    :: Check the transaction file against the expected one
     fc !TEST_PATH!\\!TEST_NAME!.etf !TEST_PATH!\\!TEST_NAME!.atf
     if errorlevel 1 (
         :: A test failed, stop all tests and let the user know
@@ -48,8 +48,18 @@ for /r %%f in (*.inp) do (
         set RETURN_CODE=1
         goto end
     ) else (
-        echo Test !TEST_NAME! succeeded!
-        echo:
+        :: Check the console output against the expected one
+        fc !TEST_PATH!\\!TEST_NAME!.eout !TEST_PATH!\\!TEST_NAME!.aout
+        if errorlevel 1 (
+            :: A test failed, stop all tests and let the user know
+            echo Test !TEST_NAME! failed
+            echo:
+            set RETURN_CODE=1
+            goto end
+        ) else (
+            echo Test !TEST_NAME! succeeded!
+            echo:
+        )
     )
 )
 

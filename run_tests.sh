@@ -29,10 +29,10 @@ for f in ./**/*.inp; do
     touch $TEST_PATH/$TEST_NAME.atf
 
     # Run program with redirected IO
-    "../build/frontend" current_users.txt available_items.txt $TEST_PATH/$TEST_NAME.atf <$f >$TEST_PATH/$TEST_NAME.out 2>&1
+    "../build/frontend" current_users.txt available_items.txt $TEST_PATH/$TEST_NAME.atf <$f >$TEST_PATH/$TEST_NAME.aout 2>&1
     if [ ! $? -eq 0 ]; then
         # An error occurred while running the frontend, stop all tests and let the user know
-        echo Frontend exitted unexpectedly, check $TEST_PATH/$TEST_NAME.out for more information...
+        echo Frontend exitted unexpectedly, check $TEST_PATH/$TEST_NAME.aout for more information...
         printf "\n"
 
         # Return to project root folder
@@ -50,8 +50,18 @@ for f in ./**/*.inp; do
         cd ..
         exit 1
     else
-        echo Test $TEST_NAME succeeded!
-        printf "\n"
+        diff $TEST_PATH/$TEST_NAME.eout $TEST_PATH/$TEST_NAME.aout
+        if [ ! $? -eq 0 ]; then
+            # A test failed, stop all tests and let the user know
+            echo Test $TEST_NAME failed
+
+            # Return to project root folder
+            cd ..
+            exit 1
+        else
+            echo Test $TEST_NAME succeeded!
+            printf "\n"
+        fi
     fi
 done
 

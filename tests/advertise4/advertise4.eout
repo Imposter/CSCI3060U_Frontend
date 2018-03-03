@@ -1,0 +1,6 @@
+Auction> Enter your username: Login accepted
+Welcome, selluser
+Auction> Enter item name: Enter price: Enter auction length (in days): ERROR: Amount of days to auction exceeds limit of 100
+Auction> Session terminated
+Goodbye selluser
+Auction> 
