@@ -23,3 +23,6 @@
 
 // Maximum days to auction
 #define ITEM_AUCTION_MAX 100
+
+// Maximum days to auction length
+#define ITEM_AUCTION_LENGTH 3

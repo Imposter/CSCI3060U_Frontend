@@ -15,6 +15,10 @@ bool ItemFile::Open()
 	auto lines = ReadLines();
 	for (const auto &line : lines)
 	{
+		// End of file item
+		if (line == "END")
+			break;
+
 		std::stringstream stream(line);
 
 		std::string itemName;
@@ -43,10 +47,6 @@ bool ItemFile::Open()
 
 		stream >> daysToAuction;
 		stream >> currentBid;
-
-		// End of file user
-		if (itemName == "END")
-			break;
 
 		mItems.push_back(std::make_shared<Item>(itemName, sellerUserName, buyerUserName, daysToAuction, currentBid));
 	}

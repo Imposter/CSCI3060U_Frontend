@@ -14,6 +14,10 @@ bool UserFile::Open()
 	auto lines = ReadLines();
 	for (const auto &line : lines)
 	{
+		// End of file user
+		if (line == "END")
+			break;
+
 		std::stringstream stream(line); 
 		
 		std::string name;
@@ -23,10 +27,6 @@ bool UserFile::Open()
 		stream >> name;
 		stream >> type;
 		stream >> credits;
-
-		// End of file user
-		if (name == "END")
-			break;
 
 		mUsers.push_back(std::make_shared<User>(name, GetUserTypeFromString(type), credits));
 	}
