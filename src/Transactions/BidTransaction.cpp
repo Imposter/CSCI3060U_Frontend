@@ -45,7 +45,7 @@ std::shared_ptr<BidTransaction> BidTransaction::Serializer::Deserialize(std::str
 
 	stream >> newBid;
 
-	return std::make_shared<BidTransaction>(itemName, sellerUserName, sellerUserName, newBid);
+	return std::make_shared<BidTransaction>(itemName, sellerUserName, buyerUserName, newBid);
 }
 
 BidTransaction::BidTransaction(const std::string &itemName, const std::string &sellerUserName, const std::string &buyerUserName, double newBid)

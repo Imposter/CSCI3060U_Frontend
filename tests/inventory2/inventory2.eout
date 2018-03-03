@@ -1,0 +1,10 @@
+Auction> Enter your username: Privileged login accepted
+Welcome, admin
+Auction> Item Name                | Seller         | Bidder         | Bid    | Days Left
+rolex watches            | selluser       | buyuser        | 100.00 | 12 
+Auction> Enter item name: Enter seller name: Enter new bid: Bid on Rolex Watches by selluser with $110.00
+Auction> Item Name                | Seller         | Bidder         | Bid    | Days Left
+rolex watches            | selluser       | admin          | 110.00 | 12 
+Auction> Session terminated
+Goodbye admin
+Auction> 
