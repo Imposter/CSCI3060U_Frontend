@@ -37,12 +37,9 @@ int main(int argc, char **argv)
 	std::string transactionFilePath = "data/transactions.txt";
 
 	// Override default files with ones provided
-	if (argc >= 4)
-	{
-		userFilePath = argv[1];
-		itemFilePath = argv[2];
-		transactionFilePath = argv[3];
-	}
+	if (argc >= 2) userFilePath = argv[1];
+	if (argc >= 3) itemFilePath = argv[2];
+	if (argc >= 4) transactionFilePath = argv[3];
 
 	// Create transaction file if it does not exist
 	{
